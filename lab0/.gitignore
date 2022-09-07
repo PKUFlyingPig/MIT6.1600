@@ -1,0 +1,11 @@
+
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+
+# Vim Files
+*.swp
+
+.vscode
+
