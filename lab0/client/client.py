@@ -92,7 +92,7 @@ class Client:
         """
         r = requests.post(f"{self._remote_url}/rpc", json=request.as_rpc_dict())
         resp = r.json()
-        resp_type = RESPONSE_MAPPINGS.get(resp["rpc"], None)
+        resp_type = self.RESPONSE_MAPPINGS.get(resp["rpc"], None)
         if resp_type is None:
             raise ValueError(f'Invalid response type "{resp["rpc"]}".')
         resp = resp_type.from_dict(resp["data"])
