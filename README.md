@@ -18,6 +18,29 @@ There is also an autograder for your code. This is contained in the `ag/` folder
 ## Installation
 The labs are all written in python and require no installation beyond cloning the git repo. When running commands with the Makefile, a python virtual environment called `venv` will automatically be created for you, and the packages listed in `requirements.txt` for the corresponding lab will be installed.
 
+To clone the repo, first make sure you have `git` installed, and then run the command `https://github.com/mit-pdos/6.1600-labs.git`. To update once you have already cloned, use `git pull`.
+
+### For Linux/macOS
+We have provided a Makefile that reduces the number of commands you need to remember and that handles creating the virtual environment for you. These generally take the form `grade-labX`, as discussed in the Autograder section.
+
+For manual testing, you should activate the venv before running tests to ensure that you are using the correct dependencies. From the lab directory, run:
+
+`source ./venv/bin/activate`
+
+If the `venv` folder does not yet exist, any of the `make` commands will make it for you. You can type `make venv` to build the venv without running the autograder. The virtual environment will stay active (as indicated by `(venv)` somewhere in your prompt, unless you have modified it) until you type `deactivate`.
+
+### For Windows
+For Windows, the venv must be created manually and activated in order to run the autograder or any manual tests. To do this, navigate to the lab directory using `cd` (e.g. `cd C:\Users\security\school\6.1600\lab0`) and run the following commands:
+
+1. To verify python version (>= 3.10.x): `python -V`
+2. To create the virtual environment: `python -m venv venv`
+3. To activate the virtual environment: `venv/Scripts/activate`
+    - Note: if you are using powershell, you may need to follow [these](https://docs.microsoft.com/en-us/previous-versions//bb613481(v=vs.85)?redirectedfrom=MSDN) instructions to allow running scripts. You may also need to use the command as `./venv/Scripts/activate`.
+    - With the virtual environment activated, you should see `(venv)` somewhere in your prompt (unless you have customized your prompt).
+4. To install dependencies (with the venv active): `pip install -r requirements.txt`
+
+When this completes, you are all set! You will need to repeat this process for each lab. Once you have the virtual environment created and the dependencies installed, you can activate it at any time by following step 3 above. It will stay active until you type `deactivate` or until you close your terminal session. To run the autograder commands below or to run the client/server in manual tests, you will need the venv activated.
+
 ### Dependencies 
 These labs depend on Python 3.10 or later.  You can verify that your Python version is correct by running `python3 --version`, e.g.:
 ```
@@ -34,7 +57,7 @@ We have included some "doctests" to verify that our examples are correct. To run
 Note that these tests are different from the tests used by the autograder, which will be used to grade your assignments.
 
 ### Autograder
-We will grade your lab using a set of tests contained in the `ag/` directory. To run these tests, you can use `make grade-lab0` for lab 0 and similar commands for the other labs.
+We will grade your lab using a set of tests contained in the `ag/` directory. To run these tests, you can use `make grade-lab0` (on linux) or `python grade-lab.py --lab=0` (on windows, with the venv activated) for lab 0 and similar commands for the other labs.
 
 Note that the autograder mocks out the HTTP interface (`ag/common/mock_http.py` and the `link_client_server()` calls you see in the doctests) to simplify testing. However, the client-server interactions should be exactly the same as if we were using an HTTP interface---please let us know if something seems wrong.
 
@@ -51,6 +74,7 @@ You can find all the code required for each lab inside of its directory.  For in
 You can find the tasks for the corresponding assignment by looking at the Markdown file associated with the lab number.  The following files contain descriptions of the tasks for each lab:
 
  - [lab0](lab0/lab0.md)
+ - [lab1](lab1/lab1.md)
 
 Make sure to keep your solutions private, as per [the course collaboration policy](https://6s060.csail.mit.edu/2021/handouts/info_fall.pdf).  In particular, note that if you make a public fork of this repository on GitHub, any code you write there will also become public, so remember not to put your work into that fork.
 
