@@ -32,6 +32,11 @@ class ForkServer(ReferenceServer):
                 request.encoded_log_entry,
                 PhotoData(request.username, request.photo_id, request.photo_blob),
             )
+            if len(self.alternate_log_entries) > 1:
+                # if we already have one entry for id 1, don't tell
+                # the storage about the rest
+                return types.PutPhotoResponse(None)
+
         # we'll use the most recent photo as the "real" one in storage
         self._storage.store_photo(
             request.username, request.photo_id, request.photo_blob
@@ -116,20 +121,20 @@ def test_single_photo_fork():
             # note both this and the above return 1!
             pts -= 1
 
-        # allow the error to be detected in either of these places.
-        # The spec says it must be detected by when B syncs, but
-        # the log is invalid here too.
         alice_a.login()
         photo_blob2 = b"photo2"
-        try:
-            alice_a.put_photo(photo_blob2)
-        except errors.SynchronizationError:
-            return max(pts, 0)
+        if alice_a.put_photo(photo_blob2) != 2:
+            pts -= 1
 
+        # when alice_b logs in and synchronizes here,
+        # they will see alice_a's photo2. However,
+        # alice_b has never heard about photo1_a.
+        # therefore, alice_b must realize that there
+        # is an error here in order to implement the
+        # security properties.
         alice_b.login()
         photo_blob3 = b"photo3"
         try:
-            #
             alice_b.put_photo(photo_blob3)
             pts = 0
         except errors.SynchronizationError:
