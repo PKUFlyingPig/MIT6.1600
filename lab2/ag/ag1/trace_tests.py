@@ -353,7 +353,7 @@ def swap_logs(userdata, index1, index2):
 
 class TestServer(ReferenceServer):
     """
-    This is identical to the reference storage, but uses the testing version
+    This is identical to the reference server, but uses the testing version
     of the in-memory storage in order to run the test cases.
     """
 
@@ -368,7 +368,7 @@ class TestServer(ReferenceServer):
             request.username, request.photo_id, request.photo_blob
         )
         index = self._storage.log_operation(request.username, request.encoded_log_entry)
-        self._storage._map_log(request.username, request.photo_id, index)
+        self._storage._map_log(request.username, index, request.photo_id)
         return types.PutPhotoResponse(None)
 
 
@@ -770,7 +770,11 @@ def search_for_attacks(pts, seed, iters, logsize, muts):
                 attacks.append(gen_storage_mod(rng_int, logsize))
 
             for attack in attacks:
-                attack.apply(server._storage)
+                try:
+                    attack.apply(server._storage)
+                except:
+                    print("ERROR: Error in test case. This will not affect your score, but please notify staff with the following:")
+                    traceback.print_exc()
 
             try:
                 res = tracer.test_sync()
