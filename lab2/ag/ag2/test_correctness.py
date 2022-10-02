@@ -106,7 +106,7 @@ def dual_device_friend_latest_key():
     bob_2.login()
     bob_2.accept_invite(bob.public_key)
 
-    bob_2.put_photo("bob_2_photo")
+    bob_2.put_photo(b"bob_2_photo")
 
     bob.login()
     bob.put_photo(b"bob_photo_2")
@@ -116,7 +116,7 @@ def dual_device_friend_latest_key():
     alice.add_friend("bob", bob_2.public_key)
     bob_photos = alice.get_friend_photos("bob")
 
-    if not bob_photos != [b"bob_photo_0", b"bob_2_photo", b"bob_photo_2"]:
+    if not bob_photos == [b"bob_photo_0", b"bob_2_photo", b"bob_photo_2"]:
         return 0
     return pts
 
