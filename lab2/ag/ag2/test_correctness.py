@@ -185,7 +185,7 @@ def triple_device_chained_invite():
     bob_3 = new_device(server, bob)
     bob_2.invite_device(bob_3.public_key)
     bob_3.login()
-    bob_3.accept_invite(bob.public_key)
+    bob_3.accept_invite(bob_2.public_key)
     bob_3.put_photo(b"bob_3_photo_0")
 
     # put one more photo from device 1
