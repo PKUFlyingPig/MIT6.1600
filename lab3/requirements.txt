@@ -1,0 +1,5 @@
+Flask==2.2.1
+PyNaCl==1.4.0
+msgpack==1.0.4
+requests==2.28.1
+
