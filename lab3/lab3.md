@@ -16,9 +16,9 @@ As in lab 2, we will be using an out-of-band method to share _signing_ public ke
 1. To create an album, all users that the album will be shared with must be added as friends.
 2. To fetch an album, it will be required that the owner of the album is added as a friend.
 
-However, note that we have not implemented an out-of-band way of exchanging encryption public keys. __Also note that this differs from the theory lab---this replaces the `get_public_signing_key` function described there.
+However, note that we have not implemented an out-of-band way of exchanging encryption public keys. __Also note that this differs from the theory lab---this replaces the `get_public_signing_key` function described there__.
 
-We have also implemented for you the public profiles from lab 0. We have modified the client to upload its own _encryption_ public key into the public profile upon registration. Each client will also _sign_ their public profile with their signing key and place the signature in the `metadata` field of their public profile.
+We have also implemented for you the public profiles from lab 0. We have modified the client to upload its own _encryption_ public key into the public profile upon registration and have provided a metadata field where you can add extra information.
 
 Also note that the setup for this lab is mostly separate from the log-based setup for the previous labs. Instead of adding photos to the log, we will now be updating an "album" object on the server via new RPC types defined in `common/types.py`---`UploadAlbumRequest` and `GetAlbumRequest`. 
 
