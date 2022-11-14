@@ -78,6 +78,7 @@ You can find the tasks for the corresponding assignment by looking at the Markdo
  - [lab2](lab2/lab2.md)
  - [lab3](lab3/lab3.md)
  - [lab4](lab4/lab4.md)
+ - [lab5](lab5/lab5.md)
 
 Make sure to keep your solutions private, as per the course collaboration policy (see the course info handout).  In particular, note that if you make a public fork of this repository on GitHub, any code you write there will also become public, so remember not to put your work into that fork.
 
