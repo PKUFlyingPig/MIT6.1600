@@ -3,7 +3,7 @@ import attack
 import client
 import traceback
 
-def attack_one():
+def scenario_one():
     s = store.Store()
     c = client.Client(s)
 
@@ -23,7 +23,7 @@ def attack_one():
     if r is None:
         raise Exception("attack lookup returns None")
 
-def attack_two():
+def scenario_two():
     s = store.Store()
     c = client.Client(s)
 
@@ -45,7 +45,7 @@ def attack_two():
         if r is None:
             raise Exception("fake key %s not found" % k)
 
-def attack_three():
+def scenario_three():
     s = store.Store()
     a = attack.AttackThree(s)
     c = client.Client(a)
@@ -66,9 +66,9 @@ def attack_three():
         raise Exception("fake key and value not long enough")
 
 checks = {
-    "one": attack_one,
-    "two": attack_two,
-    "three": attack_three,
+    "one": scenario_one,
+    "two": scenario_two,
+    "three": scenario_three,
 }
 
 if __name__ == '__main__':

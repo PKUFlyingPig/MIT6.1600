@@ -5,3 +5,6 @@ venv: requirements.txt
 
 run-server: venv
 	. venv/bin/activate && python -m flask --app server run
+
+check: venv
+	. venv/bin/activate && python grader.py
