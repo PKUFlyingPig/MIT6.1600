@@ -4,6 +4,7 @@ class Client:
     def __init__(self, store, root_hash = H_empty()):
         self._store = store
         self._root_hash = root_hash
+        self.verbose_validate = False
 
     def validate(self, path_key, proof):
         assert(type(proof) == Proof)
@@ -16,12 +17,23 @@ class Client:
         else:
             node_hash = H_kv(proof.key, proof.val)
 
+        if self.verbose_validate:
+            print("Proof of subtree: key=%s, val=%s, node_hash=%s" % (proof.key, proof.val, node_hash))
+
         path = traversal_path(path_key)
         for (leaf_direction, sibling) in reversed(list(zip(path, proof.siblings))):
             children = [None, None]
             children[int(leaf_direction)] = node_hash
             children[int(not leaf_direction)] = sibling
             node_hash = H_internal(children)
+            if self.verbose_validate:
+                print("Traversal path for", path_key, "is", ("right" if leaf_direction else "left"))
+                print(("Right" if not leaf_direction else "Left"), "sibling hash from proof is", sibling)
+                print("Computed subtree hash:", node_hash)
+
+        if self.verbose_validate:
+            print("Computed root_hash from proof:", node_hash)
+            print("Expected root_hash from client:", self._root_hash)
 
         if self._root_hash != node_hash:
             raise Exception("Root hash mismatch")

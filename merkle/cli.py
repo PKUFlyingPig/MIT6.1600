@@ -29,6 +29,7 @@ class RemoteStore:
         requests.post(b'%s/reset' % self._url, b'')
 
 parser = argparse.ArgumentParser()
+parser.add_argument("--print-proofs", default=False, action=argparse.BooleanOptionalAction, help="print proofs")
 parser.add_argument("--server", default="http://localhost:5000", help="server URL")
 parser.add_argument("--root-file", default="merkle.root", help="file containing merkle root")
 parser.add_argument("cmd", help="get, put, or reset")
@@ -43,6 +44,8 @@ try:
     client = client.Client(s, root_hash)
 except FileNotFoundError:
     client = client.Client(s)
+
+client.verbose_validate = args.print_proofs
 
 match args.cmd:
     case 'get':
