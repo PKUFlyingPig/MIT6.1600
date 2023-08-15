@@ -98,9 +98,16 @@ encode strings in a specific way:
   Specifically, the encoding can be at most 3x the size of the input, in the worst case.
 
 - The encoding must be recoverable.  This means that, if you take an encoding
-  and chop off some parts of it (at the beginning or at the end), then decoding
-  that chopped part should produce the corresponding part of the original string,
-  modulo things that might have gotten cut off at each end.
+  and chop off some parts of it (at the beginning or at the end), then
+  decoding that chopped part should produce the corresponding part of
+  the original string, modulo things that might have gotten cut off at
+  each end.  For an encoding of a large input, if you chop off a few bytes
+  from the beginning and/or the end of the encoding, you should get back
+  most of the original data back when decoding it, but perhaps missing
+  a little bit from the beginning and/or end, respectively.  Note that
+  decoding of a chopped-off encoding should always produce a substring
+  of the original input; the decoding should never contain garbage data.
+
 
 Your job is to implement this codec.  We have
 provided a skeleton file for you to get started,
