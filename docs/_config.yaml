@@ -1,0 +1,5 @@
+markdown: kramdown
+theme: minima
+header_pages:
+- None
+title: "6.1600 Labs"
