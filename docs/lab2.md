@@ -243,7 +243,9 @@ we XOR these bytes with the ciphertext.
     and an 802.11b network has a theoretical
     maximum throughput of 11 megabits per second.
     Roughly how long will an attacker have to wait
-    to see two frames encrypted using the same IV?
+    to see two frames encrypted using the same IV,
+    assuming a busy network operating at maximum
+    capacity?
 
     What information can an attacker learn when 
     this occurs?
@@ -262,8 +264,10 @@ we XOR these bytes with the ciphertext.
     recipient into accepting a message (of length
     $$|m|$$) of the attacker's choosing.
 
-    Implement your attack in
+    Implement your attack as `attack_one` in
     [`problem4/attacker.py`](problem4/attacker.py).
+    The precise encryption scheme used by WEP is
+    implemented by `send_packet()` in `victim.py`.
 
 1.  WEP uses the CRC32 non-cryptographic hash 
     function to compute the message-integrity hash.
@@ -275,7 +279,7 @@ we XOR these bytes with the ciphertext.
     a WEP-encrypted data frame, _even without knowing_
     the message that the frame encrypts.
 
-    Implement your attack in
+    Implement your attack as `attack_two` in
     [`problem4/attacker.py`](problem4/attacker.py).
 
 1.  A WEP recipient who receives a data frame with
@@ -285,7 +289,7 @@ we XOR these bytes with the ciphertext.
     information to extract the entire contents of
     an encrypted frame.
     
-    Implement your attack in
+    Implement your attack as `attack_three` in
     [`problem4/attacker.py`](problem4/attacker.py).
     
 

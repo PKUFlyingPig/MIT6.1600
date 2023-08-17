@@ -20,7 +20,7 @@ def grade_one():
 def grade_two():
     v = Victim()
     plaintext = os.urandom(256)
-    ciphertext = v.send_packet(secret_msg)
+    ciphertext = v.send_packet(plaintext)
 
     a = Attacker(None)
     packet = a.attack_two(ciphertext)
