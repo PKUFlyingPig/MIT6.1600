@@ -12,7 +12,8 @@ title: "Lab 2: Bad randomness"
 
 # Problem 1: Bad randomness in key generation
 
-The file [`problem1/keygen.py`](lab2/keygen.py)
+The file
+[`problem1/keygen.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/random/problem1/keygen.py)
 generates an ECDSA signing keypair and prints the
 resulting public key to standard output.
 
@@ -265,9 +266,9 @@ we XOR these bytes with the ciphertext.
     $$|m|$$) of the attacker's choosing.
 
     Implement your attack as `attack_one` in
-    [`problem4/attacker.py`](problem4/attacker.py).
+    [`problem4/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/random/problem4/attacker.py).
     The precise encryption scheme used by WEP is
-    implemented by `send_packet()` in `victim.py`.
+    implemented by `send_packet()` in [`problem4/victim.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/random/problem4/victim.py).
 
 1.  WEP uses the CRC32 non-cryptographic hash 
     function to compute the message-integrity hash.
@@ -280,7 +281,7 @@ we XOR these bytes with the ciphertext.
     the message that the frame encrypts.
 
     Implement your attack as `attack_two` in
-    [`problem4/attacker.py`](problem4/attacker.py).
+    [`problem4/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/random/problem4/attacker.py).
 
 1.  A WEP recipient who receives a data frame with
     an invalid integrity hash will complain, while
@@ -290,6 +291,6 @@ we XOR these bytes with the ciphertext.
     an encrypted frame.
     
     Implement your attack as `attack_three` in
-    [`problem4/attacker.py`](problem4/attacker.py).
+    [`problem4/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/random/problem4/attacker.py).
     
 

@@ -204,7 +204,7 @@ In particular, software side channels (specifically, timing side channels) foil 
 
 # Your job
 
-Your job is to implement `steal_secret_token` in `attacker.py` to steal the secret token from the server.
+Your job is to implement `steal_secret_token` in [`problem2/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/time/problem2/attacker.py) to steal the secret token from the server.
 
 Unlike in previous labs, timing side channels have nondeterministic behavior.
 Thus, while we have provided an autograder to help you develop your solution locally, **you will need it to submit it to our autograder on Gradescope to receive an accurate evaluation.**
@@ -221,6 +221,7 @@ For the rest, have fun and good luck!
 
 # Submit lab 5
 
-Upload your `attacker.py` to Gradescope.
+Upload your
+[`problem2/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/time/problem2/attacker.py) to Gradescope.
 
 

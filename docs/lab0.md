@@ -59,7 +59,7 @@ output, but in this problem we will work with
 a toy hash function that has a 48-bit output.
 
 For this problem, you will need to read through
-the code at [hashall.py](lab0/hashall.py). 
+the code at [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py). 
 
 That Python program reads each line from standard
 input, hashes the resulting string using SHA256, 
@@ -86,7 +86,7 @@ standard output as a hex string.
 as their password, how many guesses on average
 will it take to recover their password?
 
-1. The file [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) contains a large number of hashed passwords under the toy hash function defined in [hashall.py](lab0/hashall.py). These hashes are unsalted; we computed them exactly as we computed the hash in part (A). Write a program to find a preimage of one of the hashed passwords. Submit the preimage, its hash, and your code.
+1. The file [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) contains a large number of hashed passwords under the toy hash function defined in [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py). These hashes are unsalted; we computed them exactly as we computed the hash in part (A). Write a program to find a preimage of one of the hashed passwords. Submit the preimage, its hash, and your code.
 
 1. How would the cost of the preimage-finding attack change in part (C) if each hashed password were salted with a unique salt?
 
@@ -150,7 +150,7 @@ at random.
 # Problem 4: Finding collisions
 
 Let $$H$$ be the hash function defined in
-[hashbig.py](lab0/hashbig.py).
+[hashbig.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashbig.py).
 This hash function has a 56-bit output and is
 _NOT_ the same hash function as in Problem 2.
 
