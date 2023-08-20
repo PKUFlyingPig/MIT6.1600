@@ -274,7 +274,7 @@ we XOR these bytes with the ciphertext.
     function to compute the message-integrity hash.
 
     The CRC32 hash function has the property that 
-    $$\text{CRC32}(x) \oplus \text{CRC32}(y) = \text{CRC32}(x \oplus y)$$.
+    $$\text{CRC32}(x) \oplus \text{CRC32}(y) \oplus \text{CRC32}(z) = \text{CRC32}(x \oplus y \oplus z)$$.
     Explain how an attacker can abuse this property 
     to XOR bytes of its choice into
     a WEP-encrypted data frame, _even without knowing_

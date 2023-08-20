@@ -8,33 +8,42 @@ def grade_one():
     v = Victim()
     plaintext = os.urandom(256)
     ciphertext = v.send_packet(plaintext)
+    attack_msg = os.urandom(256)
 
     a = Attacker(None)
-    packet = a.attack_one(plaintext, ciphertext)
+    packet = a.attack_one(plaintext, ciphertext, attack_msg)
     msg = v.receive_packet(packet)
     if msg is None:
         raise Exception("Victim rejected packet")
-    if msg == plaintext:
-        raise Exception("Forged message is not a new one")
+    if msg != attack_msg:
+        raise Exception("Forged message is incorrect")
 
 def grade_two():
     v = Victim()
     plaintext = os.urandom(256)
     ciphertext = v.send_packet(plaintext)
+    attack_msg = os.urandom(256)
 
     a = Attacker(None)
-    packet = a.attack_two(ciphertext)
+    packet = a.attack_two(ciphertext, attack_msg)
     msg = v.receive_packet(packet)
     if msg is None:
         raise Exception("Victim rejected packet")
-    if msg == plaintext:
-        raise Exception("Forged message is not a new one")
+    if msg != attack_msg:
+        raise Exception("Forged message is incorrect")
 
 def grade_three():
     v = Victim()
 
     plaintext = os.urandom(256)
     target_packet = v.send_packet(plaintext)
+    f = v.receive_packet
+    v.receive_packet = None
+
+    # Returns the bit of whether victim accepted packet
+    def receive_packet_okay(packet):
+        return f(packet) != None
+    v.receive_packet_okay = receive_packet_okay
 
     a = Attacker(v)
     guess = a.attack_three(target_packet)
