@@ -20,9 +20,11 @@ class Attacker:
         return forged_packet
 
     def attack_three(self, target):
-        # You may call self.victim.send_packet() 
-        # or self.victim.receive_packet_okay() here.
-        # You may NOT call self.victim.receive_packet()
+        # You may NOT call self.victim.send_packet() 
+        # or self.victim.receive_packet() here.
+        #
+        # You may call self.victim.check_packet(),
+        # defined in attacker.py.
         
         ### Your cleverness here
         return guess_of_secret_msg

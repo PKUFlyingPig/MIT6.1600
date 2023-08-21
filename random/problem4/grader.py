@@ -38,19 +38,19 @@ def grade_three():
     plaintext = os.urandom(256)
     target_packet = v.send_packet(plaintext)
     f = v.receive_packet
+    v.send_packet = None
     v.receive_packet = None
 
     # Returns the bit of whether victim accepted packet
-    def receive_packet_okay(packet):
+    def check_packet(packet):
         return f(packet) != None
-    v.receive_packet_okay = receive_packet_okay
+    v.check_packet = check_packet
 
     a = Attacker(v)
     guess = a.attack_three(target_packet)
 
     if plaintext != guess:
         raise Exception("Incorrect guess")
-
 
 checks = {
     "one": grade_one,
