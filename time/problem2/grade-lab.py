@@ -1,4 +1,4 @@
-import secure_server
+import bad_server
 import attacker
 import secrets
 import argparse
@@ -13,9 +13,9 @@ args = vars(parser.parse_args())
 
 def extract_bytes(n_bytes):
     secret = secrets.token_hex(n_bytes)
-    server = secure_server.VerySecureServer(secret)
+    server = bad_server.BadServer(secret)
     attack = attacker.Client(server)
-    res = attack.steal_secret_token(n_bytes)
+    res = attack.steal_password(n_bytes)
     return res == secret
 
 tests = [

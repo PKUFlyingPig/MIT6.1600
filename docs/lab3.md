@@ -170,36 +170,42 @@ command.
 
 ## Problem 2: Timing side-channel attack
 
-In this problem you will mount your own attack to extract a secret token from a "VeRY Secur3 SerVer".
+In this problem you will mount your own attack to
+extract a secret password from a server using an
+insecure authentication scheme.
 
-The code for this assignment is in the zip file
-[`lab3-code.zip`](lab3/code.zip).
+The code for this assignment is in [`https://github.com/mit-pdos/6.1600-labs/tree/main/time/problem2`](time/problem2).
 
 # Scenario
 
-The scenario of this lab is simple.
-You are now the attacker.
+Bob runs a payments service that, after Bob
+authenticates by sending a password to the server,
+runs the `send_money` routine to process
+a payment. (In this toy example, `send_money` is
+a no-op.)
 
-Bob is trying to save his favorite cryptocoin $ecret key on a server so he can easily verify if he is remembering it correctly.
-To do this, Bob sends a request containing his key on a secure connection to the server.
-The server replies with a bit that indicates whether the secret in the request matches the one on the server.
+In a secure implementation, Bob's server would use
+a robust off-the-shelf authenticated transport
+protocol (SSH, TLS 1.3 with pre-shared keys,
+etc.). But since Bob has not taken 6.1600 yet, he
+cooked up his own scheme.
 
-Even though the server does not authenticate the party making the request, Bob believes that he is safe as the API is very restricted: an attacker trying to guess the secret by querying the API learns no information other than whether it was correct.
-
-Prove him wrong!
+Bob's server accepts requests from the network,
+where each request contains a password. Bob's
+server checks the request's password against
+the true password and calls the `send_money`
+function only if the passwords match.
 
 # More specifically
 
-On initialization, a `SecureServer` instance generates a secret token using fresh randomness and saves it as a hexadecimal string i.e., one with characters from `0` to `9` or `a` to `f`. Note that you need **two** hexadecimal characters to represent one byte of data.
+On initialization, a `BadServer` instance generates a secret password using fresh randomness and saves it as a hexadecimal string i.e., one with characters from `0` to `9` or `a` to `f`. Note that you need **two** hexadecimal characters to represent one byte of data.
 
-The `SecureServer` allows any user to submit a `VerifyTokenRequest` with some token.
+The `BadServer` allows any user to submit a `VerifyTokenRequest` with some password.
 The server responds with a `VerifyTokenResponse`, which contains a single boolean value.
-This value is `True` if the token in the request matches the server's secret.
+This value is `True` if the password in the request matches the server's secret.
 Otherwise, the value is `False`.
 
-In addition to this correctness property, Bob claims that the server has the following security property: there is a negligible probability that an attacker can recover the secret token from the server in polynomial time (with respect to the length of the token).
-
-Unfortunately, implementation errors make it possible for you, the attacker, to violate this property.
+Implementation errors make it possible for you, the attacker, to violate this property.
 In particular, software side channels (specifically, timing side channels) foil Bob's attempt to achieve this property.
 
 # Your job
@@ -219,9 +225,5 @@ Finaly, note that you are expected to respect the python conventions and you sho
 
 For the rest, have fun and good luck!
 
-# Submit lab 5
-
-Upload your
-[`problem2/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/time/problem2/attacker.py) to Gradescope.
 
 
