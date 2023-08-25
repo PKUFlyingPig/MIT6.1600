@@ -210,7 +210,7 @@ In particular, software side channels (specifically, timing side channels) foil 
 
 # Your job
 
-Your job is to implement `steal_password` in [`timing/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/timeing/attacker.py) to steal the secret password from the server.
+Your job is to implement `steal_password` in [`timing/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/timing/attacker.py) to steal the secret password from the server.
 
 Timing side channels have nondeterministic behavior.
 Thus, while we have provided an autograder to help you develop your solution locally, **you will need it to submit your solution to our autograder on Gradescope to receive an accurate evaluation.**
@@ -225,6 +225,73 @@ Finally, you must not access private variables of
 the `BadServer` instance. 
 
 
-## Problem 3: Server performance
+## Problem 3: SSH server performance
 
-In this 
+In this lab, you will work with an SSH-based
+bulletin-board server called "sshBB," built from the very slick
+[`paramiko`](https://www.paramiko.org/) library.
+Your job will be to modify the server to make it
+reply to requests as quickly as possible
+without breaking either its security or functionality
+properties.
+
+The code for this assignment is in 
+[`perf`](https://github.com/mit-pdos/6.1600-labs/tree/main/perf).
+
+# Getting started
+
+Run `make venv` to set up your development
+environment.
+
+# Background
+
+The sshBB server authenticates to users using its 
+SSH host private key, stored in `keys/server`.
+
+The sshBB service has two types of users:
+_administrators_ and _normal users_.
+
+* Administrators can add and remove normal users.
+  Administrators do not post or read messages on
+  the bulletin board.
+
+  Administrators authenticate to sshBB using SSH public keys.
+  The public keys of the current sshBB administrators are stored
+  in `data/admin-keys.txt`, with one key per line in the format:
+  ```
+  username1,pubkey1a
+  username1,pubkey1b
+  username2,pubkey2
+  username3,pubkey3
+  ...
+  ```
+  where the public keys are stored in the default SSH format for public keys.
+  A single administrator may have multiple public keys.
+
+  Run `make data/admin-keys.txt` to generate some
+  example administrator keys. We may test your
+  server with an arbitrary number of administrator
+  keys of any type that `paramiko` supports.
+
+* Normal users can only post to and read from 
+  the bulletin board. They cannot add or remove
+  users.
+
+  Normal users authenticate to sshBB using passwords.
+  The list of users, salts, and password hashes is
+  in `data/passwords.txt`.
+  Run `make data/passwords.txt` to generate
+  a password file.
+
+  The password file has the following format:
+    ```
+    username1,salt1,hash1
+    username2,salt2,hash2
+    ...
+    ```
+  
+  The salts are binary blobs but we store them as hex strings.
+
+
+
+
