@@ -3,7 +3,17 @@ title: "Lab 1: Merkle trees"
 ---
 
 <style type="text/css">
-    ol { list-style-type: upper-alpha; }
+ol { list-style-type: upper-alpha; }
+
+blockquote {
+  color: black;
+  background: white;
+  font-style: normal;
+  font-size: inherit;
+  border: 1px solid gray;
+  background-color: lightyellow;
+  padding: 1em;
+}
 </style>
 
 <hr>

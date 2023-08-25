@@ -5,6 +5,16 @@ title: "Lab 3: Time and timing channels"
 <style type="text/css">
     ol { list-style-type: upper-alpha; }
     ol ol { list-style-type: lower-roman; }
+
+blockquote {
+  color: black;
+  background: white;
+  font-style: normal;
+  font-size: inherit;
+  border: 1px solid gray;
+  background-color: lightyellow;
+  padding: 1em;
+}
 </style>
 
 
@@ -247,15 +257,17 @@ environment.
 
 The sshBB server authenticates to users using its 
 SSH host private key, stored in `keys/server`.
+Currently, sshBB does not implement any actual
+bulletin-board functionality: after authenticating
+a remote user, it just prints a message to the
+user's terminal and closes the session.
+
+> If you would like, you can add some interactive functionality to sshBB by modifying [`sshbb.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/perf/sshbb.py)'s `do_accept` method. At the end of the function, the server can write to/read from the file-like object `f` to interact with the user.
 
 The sshBB service has two types of users:
 _administrators_ and _normal users_.
 
-* Administrators can add and remove normal users.
-  Administrators do not post or read messages on
-  the bulletin board.
-
-  Administrators authenticate to sshBB using SSH public keys.
+* Administrators authenticate to sshBB using SSH public keys.
   The public keys of the current sshBB administrators are stored
   in `data/admin-keys.txt`, with one key per line in the format:
   ```
@@ -273,15 +285,9 @@ _administrators_ and _normal users_.
   server with an arbitrary number of administrator
   keys of any type that `paramiko` supports.
 
-* Normal users can only post to and read from 
-  the bulletin board. They cannot add or remove
-  users.
-
-  Normal users authenticate to sshBB using passwords.
+* Normal users authenticate to sshBB using passwords.
   The list of users, salts, and password hashes is
   in `data/passwords.txt`.
-  Run `make data/passwords.txt` to generate
-  a password file.
 
   The password file has the following format:
     ```
@@ -289,9 +295,33 @@ _administrators_ and _normal users_.
     username2,salt2,hash2
     ...
     ```
-  
-  The salts are binary blobs but we store them as hex strings.
+  The salts are binary blobs; we store them as hex strings.
 
+  Run `make data/passwords.txt` to generate
+  a password file.
+  Run `make add-user user=carol pass=secret123` to
+  add user `carol` to the password file with
+  password `secret123`.
+  
+
+# Running the server
+
+Run `make run-server` to start the sshBB server.
+
+After running `make data/admin-keys.txt`,
+you should be able to
+authenticate to the server as `alice` using:
+```
+$ ssh -l alice -i keys/alice -p 2200 localhost
+```
+
+If everything works, you should see the message:
+```
+Welcome to the bulletin board!
+Connection to localhost closed.
+```
+
+# Your task
 
 
 
