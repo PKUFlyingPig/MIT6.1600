@@ -10,9 +10,21 @@ title: "Lab 0: Password cracking"
 
 <hr>
 
-INSTRUCTIONS HERE ON HOW TO SUBMIT
+# Instructions on how to Submit Lab0
 
-INCLUDE DETAIL ON INSTANCE WE WILL RUN ON
+Please download all the required files from the [lab0 github repo](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/).
+
+Place your code answers in the template [sol.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/sol.py) Please include all code nessecary to generate your solution in each of the respective methods (do not just hard code working answers). [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) will be included in the root directory of your solution. You may `open("hashes.txt")` in `sol.py` to compute your answer.
+
+Place your written answers in the template [questions.txt](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/questions.txt)
+
+Upload all files (`sol.py`, `questions.txt`, and any supplementary files you used) to the [lab0 gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3127745/).
+
+## Gradescope Autograder
+
+Your code will be graded with the gradescope autograder with a timeout of 5 minutes, 10 minutes, 20 minutes for the three coding problems. Your code should reliably succeed in this timeframe. 
+
+There is a STRICT 6.0GB memory limit on gradescope. This should be sufficient for reasonable solutions, however, if you generate very large dictionaries, sets, or lists, you may exceed this memory limit and the gradescope tester will fail.
 
 <hr>
 
