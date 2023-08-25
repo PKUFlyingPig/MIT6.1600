@@ -174,7 +174,7 @@ In this problem you will mount your own attack to
 extract a secret password from a server using an
 insecure authentication scheme.
 
-The code for this assignment is in [`https://github.com/mit-pdos/6.1600-labs/tree/main/time/problem2`](time/problem2).
+The code for this assignment is in [`timing`](https://github.com/mit-pdos/6.1600-labs/tree/main/timing).
 
 # Scenario
 
@@ -188,7 +188,7 @@ In a secure implementation, Bob's server would use
 a robust off-the-shelf authenticated transport
 protocol (SSH, TLS 1.3 with pre-shared keys,
 etc.). But since Bob has not taken 6.1600 yet, he
-cooked up his own scheme.
+cooked up his own ad-hoc authentication protocol.
 
 Bob's server accepts requests from the network,
 where each request contains a password. Bob's
@@ -198,10 +198,10 @@ function only if the passwords match.
 
 # More specifically
 
-On initialization, a `BadServer` instance generates a secret password using fresh randomness and saves it as a hexadecimal string i.e., one with characters from `0` to `9` or `a` to `f`. Note that you need **two** hexadecimal characters to represent one byte of data.
+On initialization, a `BadServer` instance generates a secret password using fresh randomness and saves it as a hexadecimal string i.e., one with characters from `0` to `9` or `a` to `f`. Note **two** hexadecimal characters represent one byte of data.
 
-The `BadServer` allows any user to submit a `VerifyTokenRequest` with some password.
-The server responds with a `VerifyTokenResponse`, which contains a single boolean value.
+The `BadServer` allows any user to submit a `VerifyRequest` with some password.
+The server responds with a `VerifyResponse`, which contains a single boolean value.
 This value is `True` if the password in the request matches the server's secret.
 Otherwise, the value is `False`.
 
@@ -210,20 +210,21 @@ In particular, software side channels (specifically, timing side channels) foil 
 
 # Your job
 
-Your job is to implement `steal_secret_token` in [`problem2/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/time/problem2/attacker.py) to steal the secret token from the server.
+Your job is to implement `steal_password` in [`timing/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/timeing/attacker.py) to steal the secret password from the server.
 
-Unlike in previous labs, timing side channels have nondeterministic behavior.
-Thus, while we have provided an autograder to help you develop your solution locally, **you will need it to submit it to our autograder on Gradescope to receive an accurate evaluation.**
+Timing side channels have nondeterministic behavior.
+Thus, while we have provided an autograder to help you develop your solution locally, **you will need it to submit your solution to our autograder on Gradescope to receive an accurate evaluation.**
 
 In particular,
- - The autograder will test whether you can extract secret tokens of different lengths.  The length **in bytes** is the `l` parameter to `steal_secret_token`.
- - Every test will wait 20 minutes for the attacker to extract the secret token.  Your attack must complete by this time (or the autograder will reject it).
+ - The autograder will test whether you can extract passwords of different lengths.  The length **in bytes** is the `l` parameter to `steal_password`.
+ - Every test will wait 20 minutes for the attacker to extract the secret password.  Your attack must complete by this time (or the autograder will reject it).
  - Your attack must not crash or fail (or the autograder will reject it).
  - To compute your final grade, the autograder will only be run a limited number of times per student.  Make sure that your attack succeeds with a comfortably-high probability.
 
-Finaly, note that you are expected to respect the python conventions and you should not simply access private variables when not allowed.
-
-For the rest, have fun and good luck!
-
+Finally, you must not access private variables of
+the `BadServer` instance. 
 
 
+## Problem 3: Server performance
+
+In this 

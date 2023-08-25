@@ -158,7 +158,7 @@ _NOT_ the same hash function as in Problem 2.
 
     $$H(x), H(H(x)), H(H(H(x))), \dots$$,
 
-   eventually you will enter a cycle of repeating values. 
+    eventually you will enter a cycle of repeating values. 
     Explain how to use such a cycle to find a collision in $$H$$
     (with high probability).
 
