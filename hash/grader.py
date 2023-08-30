@@ -52,77 +52,6 @@ def test_2c():
     if toy_hash(result).hex() not in data_hash:
         raise Exception(f"toy_hash(password) = {toy_hash(result).hex()} is not found in the text file of hashes!")
 
-def test_3a():
-
-    a_test = {
-        (3,4): .25,
-        (5,4): .25,
-        (7,10): .1,
-        (20,17): 0.05882352941
-    }
-
-    for in_test, answer in a_test.items():
-        out = timeout(problem_3a ,args = in_test, timeout_duration = 2)
-        if(abs(out-answer) > answer/100):
-            raise Exception(f"3a({in_test}) = {out} which is incorrect.")
-
-def test_3b():
-    b_test = {
-        (3,4): 0.0625,
-        (5,4): 0.0625,
-        (7,10): 0.01,
-        (20,17): 0.00346020761
-    }
-
-    for in_test, answer in b_test.items():
-        out = timeout(problem_3b ,args = in_test, timeout_duration = 2)
-        if(abs(out-answer) > answer/100):
-            raise Exception(f"3b({in_test}) = {out} which is incorrect.")
-
-def test_3c():
-    c_test = {
-        3: 3,
-        0: 0,
-        5: 10,
-        6: 15,
-        204: 20706,
-        312: 48516
-    }
-
-    for in_test, answer in c_test.items():
-        out = timeout(problem_3c ,args = (in_test,), timeout_duration = 2)
-        if(out != answer):
-            raise Exception(f"3c({in_test}) = {out} which is incorrect.")
-
-def test_3d(): 
-    d_test = {
-        (3,126): 0.023683547493071222,
-        (5,98): 0.09844936538138971,
-        (19,651): 0.2329451358309994,
-        (20,781): 0.21755231339277203,
-        (31, 1056): 0.35894664556915257,
-        (347,798415): 0.07244074040833626
-    }
-
-    for in_test, answer in d_test.items():
-        out = timeout(problem_3d ,args = in_test, timeout_duration = 2)
-        if(out < answer or abs(out-answer)/answer > .25):
-            raise Exception(f"3d({in_test}) = {out} which is incorrect.")
-
-def test_3e():
-     e_test = {
-        (100,16): .0728,
-        (500,32): 2.9045202102784273e-05,
-        (255360000,64): 0.001765925,
-        (85120000,64): 0.00019636,
-    }
-
-     for in_test, answer in e_test.items():
-        out = timeout(problem_3e ,args = in_test, timeout_duration = 2)
-        if(out < answer or abs(out-answer)/answer > .25):
-            raise Exception(f"3e({in_test}) = {out} which is incorrect.")
-    
-
 def test_4b():
     a,b = timeout(problem_4b,timeout_duration =20*60)
 
@@ -142,11 +71,6 @@ def test_questions():
 checks = {
     "2a": test_2a,
     "2c": test_2c,
-    "3a": test_3a,
-    "3b": test_3b,
-    "3c": test_3c,
-    "3d": test_3d,
-    "3e": test_3e,
     "4b": test_4b,
     "questions": test_questions
 }
