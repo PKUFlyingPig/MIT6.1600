@@ -22,7 +22,7 @@ Upload all files (`sol.py`, `questions.txt`, and any supplementary files you use
 
 ## Gradescope Autograder
 
-Your code will be graded with the gradescope autograder with a timeout of 5 minutes, 10 minutes, 20 minutes for the three coding problems. Your code should reliably succeed in this timeframe. 
+Your code will be graded with the gradescope autograder with a timeout of 5 minutes (2a), 10 minutes(2b), 2 seconds (3a-e), 20 minutes(4b). Your code should reliably succeed in this timeframe. 
 
 There is a STRICT 6.0GB memory limit on gradescope. This should be sufficient for reasonable solutions, however, if you generate very large dictionaries, sets, or lists, you may exceed this memory limit and the gradescope tester will fail.
 
