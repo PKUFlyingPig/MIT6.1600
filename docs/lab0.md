@@ -71,7 +71,7 @@ output, but in this problem we will work with
 a toy hash function that has a 48-bit output.
 
 For this problem, you will need to read through
-the code at [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py). 
+the code at [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py) and [sol.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/sol.py). It will also be useful to run the grader locally [grader.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/grader.py). 
 
 That Python program reads each line from standard
 input, hashes the resulting string using SHA256, 
@@ -84,13 +84,23 @@ standard output as a hex string.
     ```
     echo $PASSWORD | python hashall.py
     ```
-    and it produced the output:
+    Which outputs a hash.
+
+    Each student in 6.1600 has a unique `$PASSWORD` to find. To get the hash for your `$PASSWORD`, submit an empty `sol.py` to [gradescope](https://www.gradescope.com/courses/533302/assignments/3127745/). And you should see a result like this for problem 2a:
+
     ```
-    a33a874eb313
+    2a) test_2a
+    -----------------------
+    YOUR HASH TARGET:  a33a874eb313
     ```
 
-    Write a program to find the value of `$PASSWORD`.
-    Submit the password and your code.
+    Replace line 31 in `grader.py` with the string hash target from gradescope.
+
+    ```
+    target = "FIND ME ON GRADESCOPE"  --> target = "a33a874eb313"
+    ```
+
+    Write a program to find the value of `$PASSWORD` in `problem_2a()` in `sol.py`.
 
     _Hint: `$PASSWORD` is a lower-case English word containing only the letters `a-z`._
 
@@ -98,7 +108,9 @@ standard output as a hex string.
 as their password, how many guesses on average
 will it take to recover their password?
 
-1. The file [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) contains a large number of hashed passwords under the toy hash function defined in [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py). These hashes are unsalted; we computed them exactly as we computed the hash in part (A). Write a program to find a preimage of one of the hashed passwords. Submit the preimage, its hash, and your code.
+1. The file [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) contains a large number of hashed passwords under the toy hash function defined in [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py). These hashes are unsalted; we computed them exactly as we computed the hash in part (A). Write a program to find a preimage of one of the hashed passwords. 
+
+Put your code in `problem_2c()` in `sol.py`. 
 
 1. How would the cost of the preimage-finding attack change in part (C) if each hashed password were salted with a unique salt?
 
@@ -120,24 +132,24 @@ the ball into that bin.
 
 1. For a particular ball $$i$$ and bin $$k$$, what
    is the probability, as a function of $$B$$ and
-   $$N$$, that ball $$i$$ falls into bin $$k$$?
+   $$N$$, that ball $$i$$ falls into bin $$k$$? Place your answer in `problem_3a(B,N)`
 
 1. For particular distinct balls $$i$$ and $$j$$, 
 and for a particular bin $$k$$, what is the 
     probability, as a function of $$B$$ and $$N$$,
     that ball $$i$$ _and_ ball $$j$$ fall into bin
-$$k$$?
+$$k$$? Place your answer in `problem_3b(B,N)`
 
 1.  How many _pairs_ of distinct balls $$(i,j)$$ are there in
     total, as a function of $$B$$? 
     For example, if there were three balls 
     $$(B=3)$$ there would be a total of three pairs:
-    $$(1, 2), (1, 3), (2, 3)$$.
+    $$(1, 2), (1, 3), (2, 3)$$. Place your answer in `problem_3c(B)`
 
 1.  Give a non-trivial _upper bound_, as a function of $$B$$
     and $$N$$ on the probability that any two balls fall into the same bin.
     In other words, you will compute and
-expression of the form $$\Pr[\text{two balls in same bin}] \leq \text{???}$$.
+expression of the form $$\Pr[\text{two balls in same bin}] \leq \text{???}$$. Place your answer in `problem_3d(B,N)`
     
     _Hint: Use the union bound. That is, if
 $$B_1$$ and $$B_2$$ are two bad events, then the
@@ -150,7 +162,7 @@ That is: $$\Pr[B_1 \lor B_2] \leq \Pr[B_1] + \Pr[B_2]$$._
     a random function. That is, for all $$x \in
 \{0,1\}^n$$, the value $$H(x)$$ is a random
 $$n$$-bit string chosen independent and uniformly
-at random.
+at random. Place your answer in `problem_3e(L,n)`
 
     Using your answer to part (D), compute give
     a non-trivial upper bound on the probability
@@ -176,8 +188,11 @@ _NOT_ the same hash function as in Problem 2.
     $$\ll \sqrt{2^{56}}$$ bits.
 
 1. Write a program to find a collision in $$H$$.
+
    *Your program should complete in fewer than
    15 minutes on a modern laptop.*
+
+   Place your code in `problem_4b()` in `sol.py`. 
 
    _Hint:_ Use your answer from Part (A).
 
@@ -192,4 +207,6 @@ _NOT_ the same hash function as in Problem 2.
     _Hint:_ For debugging, run your program on
     a small-output hash function first to make sure
     that it can actually find collisions.
+
+    _Note:_ On gradescope the hash function will be salted differently than on the local tester, so you can not hard-code in a collision, but should instead submit the code that finds the collision itself.
 
