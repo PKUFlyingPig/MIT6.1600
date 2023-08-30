@@ -28,8 +28,10 @@ def test_2a():
     if(isinstance(result, str)):
         result = result.encode("ascii")
 
-    if toy_hash(result).hex() != "a33a874eb313":
-        raise Exception(f"toy_hash(password) outputs {toy_hash(result).hex()}, not a33a874eb313")
+    target = "FIND ME ON GRADESCOPE"
+
+    if toy_hash(result).hex() != target:
+        raise Exception(f"toy_hash(password) outputs {toy_hash(result).hex()}, not {target}")
 
 
 def test_2c():
