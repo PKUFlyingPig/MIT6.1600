@@ -172,7 +172,8 @@ _NOT_ the same hash function as in Problem 2.
 
     eventually you will enter a cycle of repeating values. 
     Explain how to use such a cycle to find a collision in $$H$$
-    (with high probability).
+    (with high probability) while storing
+    $$\ll \sqrt{2^{56}}$$ bits.
 
 1. Write a program to find a collision in $$H$$.
    *Your program should complete in fewer than
@@ -184,6 +185,9 @@ _NOT_ the same hash function as in Problem 2.
     make as few memory accesses as possible.
     Making many lookups into a gigantic array 
     or hash table will slow you down.
+    In addition, a solution that stores a lookup table of size $$2^{30}$$
+    will almost certainly run out of memory on Gradescope,
+    so you will need to do something more clever.
 
     _Hint:_ For debugging, run your program on
     a small-output hash function first to make sure
