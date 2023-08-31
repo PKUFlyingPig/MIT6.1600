@@ -20,9 +20,9 @@ Place your written answers in the template [questions.txt](https://github.com/mi
 
 Upload all files (`sol.py`, `questions.txt`, and any supplementary files you used) to the [lab0 gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3127745/).
 
-## Gradescope Autograder
+# Gradescope Autograder
 
-Your code will be graded with the gradescope autograder with a timeout of 5 minutes (2a), 10 minutes(2b), 2 seconds (3a-e), 20 minutes(4b). Your code should reliably succeed in this timeframe. 
+Your code will be graded with the gradescope autograder with a timeout of 5 minutes (2a), 10 minutes (2b), 2 seconds (3a-e), 20 minutes (4b). Your code should reliably succeed in this timeframe. 
 
 There is a STRICT 6.0GB memory limit on gradescope. This should be sufficient for reasonable solutions, however, if you generate very large dictionaries, sets, or lists, you may exceed this memory limit and the gradescope tester will fail.
 
@@ -108,9 +108,7 @@ standard output as a hex string.
 as their password, how many guesses on average
 will it take to recover their password?
 
-1. The file [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) contains a large number of hashed passwords under the toy hash function defined in [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py). These hashes are unsalted; we computed them exactly as we computed the hash in part (A). Write a program to find a preimage of one of the hashed passwords. 
-
-Put your code in `problem_2c()` in `sol.py`. 
+1. The file [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) contains a large number of hashed passwords under the toy hash function defined in [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py). These hashes are unsalted; we computed them exactly as we computed the hash in part (A). Write a program to find a preimage of one of the hashed passwords. Put your code that finds and returns the preimage in `problem_2c()` in `sol.py`. 
 
 1. How would the cost of the preimage-finding attack change in part (C) if each hashed password were salted with a unique salt?
 
@@ -208,5 +206,5 @@ _NOT_ the same hash function as in Problem 2.
     a small-output hash function first to make sure
     that it can actually find collisions.
 
-    _Note:_ On gradescope the hash function will be salted differently than on the local tester, so you can not hard-code in a collision, but should instead submit the code that finds the collision itself.
+    _Note:_ Do not hard code in a single working solution. Submit all the code you used to generate the collision in `problem_4b()` to run on gradescope.
 
