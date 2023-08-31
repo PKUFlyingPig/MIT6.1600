@@ -8,31 +8,42 @@ title: "Lab 0: Password cracking"
     ol { list-style-type: upper-alpha; }
 </style>
 
-<hr>
-
-# Instructions on how to Submit Lab0
-
+**Instructions on how to submit Lab 0:**
 Please download all the required files from the [lab0 github repo](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/).
 
-Place your code answers in the template [sol.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/sol.py) Please include all code nessecary to generate your solution in each of the respective methods (do not just hard code working answers). [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) will be included in the root directory of your solution. You may `open("hashes.txt")` in `sol.py` to compute your answer.
+* **Code:** Place your code answers in the template [`sol.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/sol.py).
+    Please include all code necessary to generate your solution in each of the respective methods. Do not just hard code working answers!
 
-Place your written answers in the template [questions.txt](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/questions.txt)
+* **Text:** Place your written answers in the template [`questions.txt`](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/questions.txt)
 
 Upload all files (`sol.py`, `questions.txt`, and any supplementary files you used) to the [lab0 gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3127745/).
 
-# Gradescope Autograder
+**Gradescope autograder:**
+Your code will be graded with the Gradescope autograder with a timeout of 5 minutes (2a), 10 minutes(2b), 2 seconds (3a-e), 20 minutes(4b). Your code should reliably succeed in this timeframe. 
 
-Your code will be graded with the gradescope autograder with a timeout of 5 minutes (2a), 10 minutes (2b), 2 seconds (3a-e), 20 minutes (4b). Your code should reliably succeed in this timeframe. 
+There is a STRICT 6.0GB memory limit on Gradescope. This should be sufficient for reasonable solutions, however, if you generate very large dictionaries, sets, or lists, you may exceed this memory limit and the Gradescope tester will fail.
 
-There is a STRICT 6.0GB memory limit on gradescope. This should be sufficient for reasonable solutions, however, if you generate very large dictionaries, sets, or lists, you may exceed this memory limit and the gradescope tester will fail.
 
-<hr>
+**Plagiarism:** Gradescope automatically
+runs a surprisingly effective 
+plagiarism-detection tool on your
+submissions. Please do not copy code from your
+fellow students. Refer to the "Collaboration"
+section of the [course
+info](https://61600.csail.mit.edu/2023/handouts/info.pdf)
+document for details on what types of
+collaboration are and aren't allowed in 6.1600.
+If you are having trouble completing an assignment
+for whatever reason, _please_ ask the course staff
+for help. We are often happy to give help and,
+in many cases, extensions too! 
+We are not happy when we find copied code. 
 
+**Optional reference reading:**
 The [Boneh-Shoup book, Chapter 18.3](https://toc.cryptobook.us/book.pdf) is a good place to look if you would like to see a very detailed formal treatment of the ideas covered in this problem set.
 
-You *MAY NOT* use any off-the-shelf password-cracking programs
-or libraries to complete this problem.
-
+<hr height=1>
+<br>
 
 # Problem 1: Storing passwords
 
@@ -65,6 +76,9 @@ part (d)? Why?
 
 
 # Problem 2: Cracking passwords
+
+You *MAY NOT* use any off-the-shelf password-cracking programs
+or libraries to complete this problem.
 
 In reality, we use hash functions with 256 bits of
 output, but in this problem we will work with
@@ -108,7 +122,11 @@ standard output as a hex string.
 as their password, how many guesses on average
 will it take to recover their password?
 
-1. The file [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) contains a large number of hashed passwords under the toy hash function defined in [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py). These hashes are unsalted; we computed them exactly as we computed the hash in part (A). Write a program to find a preimage of one of the hashed passwords. Put your code that finds and returns the preimage in `problem_2c()` in `sol.py`. 
+1. The file [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) contains a large number of hashed passwords under the toy hash function defined in [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py). These hashes are unsalted; we computed them exactly as we computed the hash in part (A). Write a program to find a preimage of one of the hashed passwords. 
+
+    The file [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) will be included in the root directory of your solution. You may `open("hashes.txt")` in `sol.py` to compute your answer.
+
+    Put your code in `problem_2c()` in `sol.py`. 
 
 1. How would the cost of the preimage-finding attack change in part (C) if each hashed password were salted with a unique salt?
 
