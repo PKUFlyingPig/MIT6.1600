@@ -309,19 +309,28 @@ _administrators_ and _normal users_.
 Run `make run-server` to start the sshBB server.
 
 After running `make data/admin-keys.txt`,
-you should be able to
-authenticate to the server as `alice` using:
+you should be able to authenticate to the server as `alice` 
+(in a separate shell) using:
 ```
 $ ssh -l alice -i keys/alice -p 2200 localhost
 ```
 
-If everything works, you should see the message:
+If everything works, you should see the following 
+message on the client side:
 ```
 Welcome to the bulletin board!
 Connection to localhost closed.
 ```
 
+After adding a password-based user account by
+running `make add-user` (as above), you should be
+able to log in as that user with a password:
+```
+$ ssh -l carol -p 2200 localhost
+```
+
+
 # Your task
 
-
+Your task
 
