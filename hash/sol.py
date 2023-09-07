@@ -1,7 +1,7 @@
 from hashall import *
 from hashbig import *
 
-# return password, where toy_hash(password) = a33a874eb313
+# return password, where toy_hash(password) = <HASH_OUTPUT_BY_GRADESCOPE>
 def problem_2a():
     password = None
     return password
