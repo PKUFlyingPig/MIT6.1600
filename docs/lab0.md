@@ -119,7 +119,10 @@ standard output as a hex string.
     _Hint: `$PASSWORD` is a lower-case English word containing only the letters `a-z`._
 
 1. If a user chooses a uniformly random string of 20 letters (`a-z`)
-as their password, how many guesses on average
+as their password, and we hash the password with
+a standard cryptographic hash function with
+256-bit output,
+how many guesses on average
 will it take to recover their password?
 
 1. The file [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) contains a large number of hashed passwords under the toy hash function defined in [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py). These hashes are unsalted; we computed them exactly as we computed the hash in part (A). Write a program to find a preimage of one of the hashed passwords. 
