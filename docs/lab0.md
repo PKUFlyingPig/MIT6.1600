@@ -164,7 +164,7 @@ $$k$$? Place your answer in `problem_3b(B,N)`
 
 1.  Give a non-trivial _upper bound_, as a function of $$B$$
     and $$N$$ on the probability that any two balls fall into the same bin.
-    In other words, you will compute and
+    In other words, you will compute an
 expression of the form $$\Pr[\text{two balls in same bin}] \leq \text{???}$$. Place your answer in `problem_3d(B,N)`
     
     _Hint: Use the union bound. That is, if
