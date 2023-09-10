@@ -54,6 +54,9 @@ def test_2c():
 
 def test_4b():
     a,b = timeout(problem_4b,timeout_duration =20*60)
+    
+    if a == b:
+        raise Exception(f"colliding pre-images can not be equal! {a} == {b}")
 
     if H(a) !=  H(b):
         raise Exception(f"H({a}) = {H(a).hex()} != H({b}) = {H(b).hex()}")
