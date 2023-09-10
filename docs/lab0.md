@@ -119,7 +119,10 @@ standard output as a hex string.
     _Hint: `$PASSWORD` is a lower-case English word containing only the letters `a-z`._
 
 1. If a user chooses a uniformly random string of 20 letters (`a-z`)
-as their password, how many guesses on average
+as their password, and we hash the password with
+a standard cryptographic hash function with
+256-bit output,
+how many guesses on average
 will it take to recover their password?
 
 1. The file [hashes.txt](https://www.dropbox.com/s/jgfzvzs7xawx8kf/hashes.txt?dl=0) contains a large number of hashed passwords under the toy hash function defined in [hashall.py](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/hashall.py). These hashes are unsalted; we computed them exactly as we computed the hash in part (A). Write a program to find a preimage of one of the hashed passwords. 
@@ -164,7 +167,7 @@ $$k$$? Place your answer in `problem_3b(B,N)`
 
 1.  Give a non-trivial _upper bound_, as a function of $$B$$
     and $$N$$ on the probability that any two balls fall into the same bin.
-    In other words, you will compute and
+    In other words, you will compute an
 expression of the form $$\Pr[\text{two balls in same bin}] \leq \text{???}$$. Place your answer in `problem_3d(B,N)`
     
     _Hint: Use the union bound. That is, if
