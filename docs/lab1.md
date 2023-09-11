@@ -80,14 +80,7 @@ The way the client authenticates the store's responses is by constructing
 a tree of the current key-value mappings, and building a Merkle hash tree
 for that key-value tree.  An example Merkle tree is shown in this figure:
 
-```mermaid
-graph TD;
-  A-->|Left| B;
-  A-->|Right| C;
-  B-->|Left| D[D: foo -> bar];
-  B-->|Right| E[E: baz -> quux];
-  C-->|Right| F[F: abc -> def];
-```
+![Merkle tree diagram](merkle-tree.drawio.svg)
 
 You can see the code for this construction in
 [common.py](https://github.com/mit-pdos/6.1600-labs/blob/main/merkle/common.py).
@@ -192,9 +185,28 @@ many key-value lookups will then succeed on the client (all of the keys in
   Run `make check` to check if your attack works.
 
 
-# Attack scenario 3: Insert confusion
+# Attack scenario 3: Fake proofs
 
 Consider the scenario in `scenario_three()` of
+[grader.py](https://github.com/mit-pdos/6.1600-labs/blob/main/merkle/grader.py):
+the grader inserts many keys, `k0` through `k999`, into the store.
+Your job, in `AttackThree`, is to create fake proofs that convince the
+client that all of those keys are missing (i.e., `lookup()` should return
+`None`).  To make this attack slightly more challenging, and to also
+prepare you for the next attack, you must construct fake proofs with a
+single element in the `proof.siblings` list.
+
+1. Find a weakness in the authentication scheme that allows an adversary to
+  mount an attack against scenario 3.
+
+2. Implement your attack by modifying `AttackThree` in
+  [attack.py](https://github.com/mit-pdos/6.1600-labs/blob/main/merkle/attack.py).
+  Run `make check` to check if your attack works.
+
+
+# Attack scenario 4: Insert confusion
+
+Consider the scenario in `scenario_four()` of
 [grader.py](https://github.com/mit-pdos/6.1600-labs/blob/main/merkle/grader.py):
 the client inserts 1000 short key-value pairs of the client's choice,
 while interacting with the adversary's store.  (Previously all of
@@ -220,10 +232,10 @@ What proof is being presented for each `put` operation?  How does the
 proof presented for `put hello world` compare with the proof presented for
 `get hello`?  What about for `abc`?  You don't have to submit answers
 to these questions, but understanding how this works will likely help
-you implement the attack for scenario 3.
+you implement the attack for scenario 4.
 
 1. Find a weakness in the authentication scheme that allows an adversary to
-  mount an attack against scenario 3.
+  mount an attack against scenario 4.
 
 2. Implement your attack by modifying `AttackThree` in
   [attack.py](https://github.com/mit-pdos/6.1600-labs/blob/main/merkle/attack.py).

@@ -45,9 +45,35 @@ def scenario_two():
         if r is None:
             raise Exception("fake key %s not found" % k)
 
+class EnforceOneSiblingLookupProof(attack.AttackThree):
+    def lookup(self, key):
+        pf = super().lookup(key)
+        if len(pf.siblings) != 1:
+            raise Exception("expected one sibling in proof, got %d", len(pf.siblings))
+        return pf
+
 def scenario_three():
     s = store.Store()
-    a = attack.AttackThree(s)
+    c = client.Client(s)
+
+    for i in range(1000):
+        k = b'k%d' % i
+        v = b'v%d' % i
+        c.insert(k, v)
+
+    a = EnforceOneSiblingLookupProof(s)
+    c._store = a
+
+    for i in range(1000):
+        k = b'k%d' % i
+        v = b'v%d' % i
+        r = c.lookup(k)
+        if r is not None:
+            raise Exception("key %s is still present, value %s", k, r)
+
+def scenario_four():
+    s = store.Store()
+    a = attack.AttackFour(s)
     c = client.Client(a)
 
     for i in range(1000):
@@ -69,6 +95,7 @@ checks = {
     "one": scenario_one,
     "two": scenario_two,
     "three": scenario_three,
+    "four": scenario_four,
 }
 
 if __name__ == '__main__':

@@ -25,11 +25,18 @@ class AttackThree:
     def __init__(self, s):
         self._store = s
 
-    def insert(self, key, val):
-        return self._store.insert(key, val)
-
     def lookup(self, key):
         return self._store.lookup(key)
 
+class AttackFour:
+    def __init__(self, s):
+        self._store = s
+
+    def insert(self, key, val):
+        return self._store.insert(key, val)
+
     def attack_fake_key(self):
         return b''
+
+    def lookup(self, key):
+        return self._store.lookup(key)
