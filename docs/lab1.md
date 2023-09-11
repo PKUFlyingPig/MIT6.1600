@@ -237,7 +237,7 @@ you implement the attack for scenario 4.
 1. Find a weakness in the authentication scheme that allows an adversary to
   mount an attack against scenario 4.
 
-2. Implement your attack by modifying `AttackThree` in
+2. Implement your attack by modifying `AttackFour` in
   [attack.py](https://github.com/mit-pdos/6.1600-labs/blob/main/merkle/attack.py).
   Run `make check` to check if your attack works.
 
