@@ -49,7 +49,7 @@ class EnforceOneSiblingLookupProof(attack.AttackThree):
     def lookup(self, key):
         pf = super().lookup(key)
         if len(pf.siblings) != 1:
-            raise Exception("expected one sibling in proof, got %d", len(pf.siblings))
+            raise Exception("expected one sibling in proof, got %d" % len(pf.siblings))
         return pf
 
 def scenario_three():
@@ -69,7 +69,7 @@ def scenario_three():
         v = b'v%d' % i
         r = c.lookup(k)
         if r is not None:
-            raise Exception("key %s is still present, value %s", k, r)
+            raise Exception("key %s is still present, value %s" % (k, r))
 
 def scenario_four():
     s = store.Store()
