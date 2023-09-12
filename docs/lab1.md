@@ -204,7 +204,7 @@ single element in the `proof.siblings` list.
   Run `make check` to check if your attack works.
 
 
-# Attack scenario 4: Insert confusion
+# Attack scenario 4: Insert confusion (Optional, extra credit)
 
 Consider the scenario in `scenario_four()` of
 [grader.py](https://github.com/mit-pdos/6.1600-labs/blob/main/merkle/grader.py):
@@ -254,7 +254,7 @@ key-value store:
 > correct store, or raise an exception.
 
 1. Extend this definition to capture the attack scenarios codified
-   in `grader.py` in the three attacks above, to arrive at a strong
+   in `grader.py` in the attacks above, to arrive at a strong
    definition of security for an authenticated key-value store.
 
 2. How would you change the implementation to ensure security against all
