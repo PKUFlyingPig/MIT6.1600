@@ -18,14 +18,44 @@ blockquote {
 
 <hr>
 
-INSTRUCTIONS HERE ON HOW TO SUBMIT
+**Instructions on how to submit Lab 1:**
+Please download all the required files from the [lab1 github repo](https://github.com/mit-pdos/6.1600-labs/tree/main/merkle/).
 
-<hr>
+* **Code:** Place your code answers in the template [`attack.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/merkle/attack.py).
+    Please include all code necessary to generate your solution in each of the respective methods. Do not just hard code working answers!
 
+* **Text:** Place your written answers in the template [`questions.txt`](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/questions.txt)
+
+Upload all files (`attack.py`, `questions.txt`) to the [lab1 gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3287458/).
+
+**Gradescope autograder:**
+Your code will be graded with the Gradescope autograder with a total timeout of 40 minutes.
+
+There is a STRICT 6.0GB memory limit on Gradescope. Reasonable solutions to this lab should not come close to approaching this memory limit.
+
+
+**Plagiarism:** Gradescope automatically
+runs a surprisingly effective 
+plagiarism-detection tool on your
+submissions. Please do not copy code from your
+fellow students. Refer to the "Collaboration"
+section of the [course
+info](https://61600.csail.mit.edu/2023/handouts/info.pdf)
+document for details on what types of
+collaboration are and aren't allowed in 6.1600.
+If you are having trouble completing an assignment
+for whatever reason, _please_ ask the course staff
+for help. We are often happy to give help and,
+in many cases, extensions too! 
+We are not happy when we find copied code. 
+
+**Optional reference reading:**
 The [Boneh-Shoup book, Chapter 8.9](https://toc.cryptobook.us/book.pdf)
 presents a formal treatment of Merkle trees and authenticated data
 structures, if you would like a more detailed discussion of the ideas
 behind this lab assignment.
+
+<hr>
 
 In this lab assignment, you will attack an authenticated
 key-value store that uses Merkle trees.  The code is available at
