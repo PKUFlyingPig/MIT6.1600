@@ -1,21 +1,38 @@
 Question 1:
 
-A)
+A) Protecting the hashed passwords in the shadow file is crucial to prevent unauthorized users from running offline attacks like rainbow table attacks or brute-force attacks to reverse-engineer the original passwords.
 
-B)
+B) The shadow file format allows the password hashes for each user to be hashed with a different hash function to provide "salting," which makes precomputed attacks like rainbow tables ineffective. Different hash algorithms can also be employed for stronger security measures and to meet specific needs of individual users.
 
-C)
+C) Iterating a hash function like in PBKDF2 increases computational complexity, thereby making brute-force attacks more time-consuming and costly.
 
-D)
+D) When using PBKDF2 for a popular web service like MIT Touchstone, the iteration count should be set high enough to deter brute-force attacks but not so high that it severely impacts system performance or user experience. You'll have to strike a balance, and this often involves testing. Companies often use thousands or even millions of iterations.
 
-E)
+E) If I were using PBKDF2 to protect passwords for authenticating to a laptop, my answer might differ from protecting a web service. Typically, a laptop has more predictable hardware performance characteristics than a distributed web service, so you can usually afford to set a higher iteration count without worrying as much about system-wide performance degradation. This offers enhanced security, which is often desirable for personal devices that may store sensitive information.
 
 Question 2:
 
-B)
+B) If each of the 20 characters in the password can be any letter from 'a' to 'z', there are 26 choices for each character. This gives you a total of 20^26 possible strings. To find the password through brute force, on average you'd expect to have to try half of the possibilities before hitting the correct one. So, the average number of guesses needed would be: 20^26/2
 
-D)
+D) The cost of the pre image-finding attack will increase since now the search space becomes P x S, where P is the password space and S is the salt space.
 
 Question 4:
 
-A)
+A) We can use the "tortoise and hare" algorithm which commonly used to detect cycles in a linked list to find the cycle in H and then use it to find a pair of collision. We can initialize a random value x0, and create two "tortoise" H(x0) and hare H(H(x0)). Each time if "tortoise" != "hare", we apply tortoise = H(tortoise) and hare = H(H(hare)). Since the cycle exists, finally tortoise will equal to hare (we call it the meet_point), creating a scenario like below (-> means apply H):
+   H
+x0 -> x -> x -> x -> x1-> x -> x -> x -> meet_point -> x -> x -> x -> x -> x
+                          |                                                |
+                          x2                                               x
+                          |                                                |
+                          x                                                x
+                          |                                                |
+                          x                                                x
+                          |                                                |
+                          x                                                x
+                          |                                                |                                        
+                          x <- x <- x <- x <- x <- x <- x <- x <- x <- x <-x
+                                                                      
+We can find in the "entry point" of the cycle, there is a hash collision x1 and x2.
+We can use constant memory to find x1 and x2 without saving all the hash values on the way. The process can be divided into two steps:
+(1) compute the length of the cycle L: this can be easily done in constant memory
+(2) make two pointers meet exactly at the entry point, here is the process: initialize two points x, y to x0. Then apply L times of H to y, which makes y L steps ahead of x. Then in each step, x = H(x), y = H(y), finally x and y will meet at the entry point. By storing x, y and their preimages, we can find the collision.
