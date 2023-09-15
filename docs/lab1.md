@@ -24,9 +24,14 @@ Please download all the required files from the [lab1 github repo](https://githu
 * **Code:** Place your code answers in the template [`attack.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/merkle/attack.py).
     Please include all code necessary to generate your solution in each of the respective methods. Do not just hard code working answers!
 
-* **Text:** Place your written answers in the template [`questions.txt`](https://github.com/mit-pdos/6.1600-labs/tree/main/hash/questions.txt)
+* **Text:** Place your written answers in the template [`questions.txt`](https://github.com/mit-pdos/6.1600-labs/tree/main/merkle/questions.txt)
 
 Upload all files (`attack.py`, `questions.txt`) to the [lab1 gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3287458/).
+
+**Running the Lab on Windows**
+`make check` and `make run-server` and `make venv` do not natively work on Windows.
+
+If you are using a windows machine, please see the [Windows Instructions](https://github.com/mit-pdos/6.1600-labs/tree/main/merkle/windows-instructions.md).
 
 **Gradescope autograder:**
 Your code will be graded with the Gradescope autograder with a total timeout of 40 minutes.
