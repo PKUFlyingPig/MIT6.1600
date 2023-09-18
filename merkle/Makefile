@@ -4,7 +4,7 @@ venv: requirements.txt
 	touch venv
 
 run-server: venv
-	venv/bin/python -m flask --app server run
+	venv/bin/python server.py
 
 check: venv
 	venv/bin/python grader.py

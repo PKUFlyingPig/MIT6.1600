@@ -30,7 +30,7 @@ class RemoteStore:
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--print-proofs", default=False, action=argparse.BooleanOptionalAction, help="print proofs")
-parser.add_argument("--server", default="http://localhost:5000", help="server URL")
+parser.add_argument("--server", default="http://localhost:6160", help="server URL")
 parser.add_argument("--root-file", default="merkle.root", help="file containing merkle root")
 parser.add_argument("cmd", help="get, put, or reset")
 parser.add_argument("key", help="key to get or put", nargs="?")
