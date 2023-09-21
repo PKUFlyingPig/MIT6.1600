@@ -14,11 +14,11 @@ Make sure you have called activate on your venv.
 
 Instead of `make run-server`:
 ```
-python3 -m flask --app server run
+python -m flask --app server run
 ```
 
 
 Instead of `make check`:
 ```
-python3 grader.py
+python grader.py
 ```
