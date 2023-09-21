@@ -12,6 +12,11 @@ pip install -r requirements.txt
 
 Make sure you have called activate on your venv.
 
+Instead of `venv/bin/python cli.py ...` 
+```
+python cli.py <get/put/reset>
+```
+
 Instead of `make run-server`:
 ```
 python -m flask --app server run
