@@ -9,6 +9,33 @@ title: "Lab 2: Bad randomness"
     ol ol { list-style-type: circle; }
 </style>
 
+# Problem 0: True/False
+
+For these problems, let $$F \colon \{0,1\}^n \times \{0,1\}^n \to \{0,1\}^n$$ 
+be a pseudorandom function.
+
+1.  The function $$\mathsf{MAC}(k,m) := F(k,m)$$
+    is a secure MAC with message space $$\{0,1\}^n$$.
+
+1.  The function $$\mathsf{MAC}(k,m) := k + m$$
+    is a secure MAC.
+
+1.  The function $$\mathsc{MAC}((k_1, k_2), m)
+
+1.  The function $$F'(k) := F(k, 0)$$ must be
+    a one-way function.
+
+1.  The function $$F'(k) := F(0, k)$$ must be
+    a one-way function.
+
+
+True/false
+- MAC(k,m) := PRF(k,m) || m is a secure MAC
+- MAC(k,m) := k + m is a secure MAC
+- Let F be OWF, F(0||x) is a OWF.
+- Let F be a PRF, F(k) := PRF(k, 0) is necessarily a OWF
+- Let F be a PRF, F(k) := PRF(0, k) is necessarily a OWF
+
 
 # Problem 1: Bad randomness in key generation
 
