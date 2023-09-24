@@ -12,15 +12,7 @@ title: "Lab 2: Bad randomness"
 # Problem 0: True/False
 
 For these problems, let $$F \colon \{0,1\}^n \times \{0,1\}^n \to \{0,1\}^n$$ 
-be a pseudorandom function.
-
-1.  The function $$\mathsf{MAC}(k,m) := F(k,m)$$
-    is a secure MAC with message space $$\{0,1\}^n$$.
-
-1.  The function $$\mathsf{MAC}(k,m) := k + m$$
-    is a secure MAC.
-
-1.  The function $$\mathsc{MAC}((k_1, k_2), m)
+be a pseudorandom function. Let $$n \approx 256$$ be the security parameter.
 
 1.  The function $$F'(k) := F(k, 0)$$ must be
     a one-way function.
@@ -28,14 +20,62 @@ be a pseudorandom function.
 1.  The function $$F'(k) := F(0, k)$$ must be
     a one-way function.
 
+1.  The function $$F'(k) := F(k, 0) \| k $$ 
+    must be a one-way function.
 
-True/false
-- MAC(k,m) := PRF(k,m) || m is a secure MAC
-- MAC(k,m) := k + m is a secure MAC
-- Let F be OWF, F(0||x) is a OWF.
-- Let F be a PRF, F(k) := PRF(k, 0) is necessarily a OWF
-- Let F be a PRF, F(k) := PRF(0, k) is necessarily a OWF
+1.  A one-way function must be collision
+    resistant.
 
+1.  If $$\mathsf{MAC}(k,m)$$ is a secure MAC, then
+    $$\mathsf{MAC}(k,m)$$ must be a pseudorandom function.
+
+1.  The function $$\mathsf{MAC}(k,m) := F(k,m)$$
+    is a secure MAC with message space $$\{0,1\}^n$$.
+
+1.  The function $$\mathsf{MAC}(k,m) := F(k,\textbf{0}^{n-1}\|m)$$
+    is a secure MAC with message space $$\{0,1\}$$,
+    where $$\textbf{0}^{n-1}$$ is a string of $$n-1$$ zeros.
+
+1.  The function $$\mathsf{MAC}(k,m) := k \oplus m$$
+    is a secure MAC.
+
+1.  The function $$\mathsf{MAC}((k_1, k_2), m)$$
+
+1.  Let $$H \colon \{0,1\}^* \to \{0,1\}^\ell$$ be a collision-resistant hash function.
+    There is a collision-finding attack on $$H$$ that runs in time roughly $$2^{\ell/2}$$.
+
+1.  If $$\Sigma$$ is a secure digital signature
+    scheme (using the definition from lecture), then 
+    $$\Sigma$$ remains secure even if an adversary can
+    obtain many signatures on messages of its
+    choice.
+
+1.  If $$\Sigma$$ is a secure digital signature
+    scheme (using the definition from lecture), then 
+    $$\Sigma$$ remains secure even if an adversary can
+    obtain half of the bits of the secret signing key.
+
+1.  It is possible to use the ``hash-and-sign'' 
+    with Lamport signatures.
+
+1.  The RSA full-domain-hash signature scheme is
+    proven secure under the RSA assumption and
+    the assumption that the hash function is
+    collision reistant.
+
+1.  A Lamport signature on an $$n$$ bit message
+    requires $$\lambda^2 n$$ bits to represent, 
+    where $$\lambda$$ is the output length of
+    the one-way function.
+
+1.  There are in principle efficient
+    (polynomial-time) attacks
+    that break all known one-way functions on 
+    a quantum computer.
+
+1.  There are in principle efficient
+    (polynomial-time) attacks
+    that break RSA on a quantum computer.
 
 # Problem 1: Bad randomness in key generation
 
