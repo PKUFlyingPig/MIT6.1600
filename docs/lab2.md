@@ -143,51 +143,8 @@ resulting public key to standard output.
     * 256 bytes
 
 
-# Problem 2: Bad randomness in GMAC
 
-Read Chapter 9.7 of [Boneh-Shoup book](https://toc.cryptobook.us/book.pdf),
-which is about the AES-GCM mode of operation.
-AES is by far the most widely used cipher today
-and GCM is a popular modern mode of operation,
-used in TLS 1.3 and many other places.
-
-This problem will demonstrate that bad randomness
-is catastrophic for AES-GCM: if the sender of a
-message reuses an encryption nonce even once, an
-attacker can break the CCA security of the
-encryption scheme.
-
-1. Say that an attacker intercepts a GCM
-   ciphertext $$(c,t)$$ and is somehow able
-   to obtain the GHASH key $$k_\text{m}$$
-   used to generate this ciphertext.
-
-   Explain how the attacker can use its knowledge
-   of $$k_\text{m}$$ to break the CCA security of
-   AES-GCM.
-
-1. Say that an attacker intercepts a pair of
-   distinct GCM ciphertexts $$(c_0, t_0)$$ and $$(c_1, t_1)$$,
-   both encrypted with the _same secret key_ and
-   the _same 96-bit encryption nonce_ $$\mathcal{N}$$.
-   Show how the attacker can recover the GHASH key
-   $$k_\text{m}$$ from these two ciphertext pairs.
-
-   _Hint:_ The function GHASH is defined using arithmetic
-   in $$GF(2^{128})$$, but you can think of GHASH
-   as using arithmetic modulo a 128-bit prime $$p$$.
-   In this setting, all of the "nice" algebraic properties hold:
-   a polynomial of degree $$d < p$$ has at most $$d$$ distinct roots
-   (and there is an efficient algorithm to find them),
-   every element has an additive and multiplicative inverse, etc.
-
-1. Propose one way to modify AES-GCM so that this
-   integrity attack is not possible, even if the sender reuses
-   the nonce.
-   In one sentence, speculate on why the GCM designers did not incorporate
-   your fix into their design.
-
-# Problem 3: Bad randomness in ECDSA
+# Problem 2: Bad randomness in ECDSA
 
 ECDSA is one of the most widely used
 digital-signature schemes.
@@ -286,7 +243,7 @@ integer.
     Therefore BadECDSA can have at most 64-bit security.
 
 
-# Problem 4: Security issues in the WEP encryption scheme
+# Problem 3: Security issues in the WEP encryption scheme
 
 The early versions of wifi used the WEP standard
 to encrypt wireless network traffic.
@@ -362,3 +319,46 @@ we XOR these bytes with the ciphertext.
     [`wep/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/wep/attacker.py).
     
 
+# Extra credit: Bad randomness in GMAC
+
+Read Chapter 9.7 of [Boneh-Shoup book](https://toc.cryptobook.us/book.pdf),
+which is about the AES-GCM mode of operation.
+AES is by far the most widely used cipher today
+and GCM is a popular modern mode of operation,
+used in TLS 1.3 and many other places.
+
+This problem will demonstrate that bad randomness
+is catastrophic for AES-GCM: if the sender of a
+message reuses an encryption nonce even once, an
+attacker can break the CCA security of the
+encryption scheme.
+
+1. Say that an attacker intercepts a GCM
+   ciphertext $$(c,t)$$ and is somehow able
+   to obtain the GHASH key $$k_\text{m}$$
+   used to generate this ciphertext.
+
+   Explain how the attacker can use its knowledge
+   of $$k_\text{m}$$ to break the CCA security of
+   AES-GCM.
+
+1. Say that an attacker intercepts a pair of
+   distinct GCM ciphertexts $$(c_0, t_0)$$ and $$(c_1, t_1)$$,
+   both encrypted with the _same secret key_ and
+   the _same 96-bit encryption nonce_ $$\mathcal{N}$$.
+   Show how the attacker can recover the GHASH key
+   $$k_\text{m}$$ from these two ciphertext pairs.
+
+   _Hint:_ The function GHASH is defined using arithmetic
+   in $$GF(2^{128})$$, but you can think of GHASH
+   as using arithmetic modulo a 128-bit prime $$p$$.
+   In this setting, all of the "nice" algebraic properties hold:
+   a polynomial of degree $$d < p$$ has at most $$d$$ distinct roots
+   (and there is an efficient algorithm to find them),
+   every element has an additive and multiplicative inverse, etc.
+
+1. Propose one way to modify AES-GCM so that this
+   integrity attack is not possible, even if the sender reuses
+   the nonce.
+   In one sentence, speculate on why the GCM designers did not incorporate
+   your fix into their design.
