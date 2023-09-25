@@ -55,8 +55,8 @@ be a pseudorandom function. Let $$n \approx 256$$ be the security parameter.
     $$\Sigma$$ remains secure even if an adversary can
     obtain half of the bits of the secret signing key.
 
-1.  It is possible to use the ``hash-and-sign'' 
-    with Lamport signatures.
+1.  It is possible to use the ``hash-and-sign''
+    paradigm with Lamport signatures.
 
 1.  The RSA full-domain-hash signature scheme is
     proven secure under the RSA assumption and
