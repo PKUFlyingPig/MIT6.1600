@@ -22,14 +22,15 @@ def grade_two():
     v = Victim()
     plaintext = os.urandom(256)
     ciphertext = v.send_packet(plaintext)
-    attack_msg = os.urandom(256)
+    attack_xor = os.urandom(256)
+    expected = bytes([plaintext[i] ^ attack_xor[i] for i in range(256)])
 
     a = Attacker(None)
-    packet = a.attack_two(ciphertext, attack_msg)
+    packet = a.attack_two(ciphertext, attack_xor)
     msg = v.receive_packet(packet)
     if msg is None:
         raise Exception("Victim rejected packet")
-    if msg != attack_msg:
+    if msg != expected:
         raise Exception("Forged message is incorrect")
 
 def grade_three():
