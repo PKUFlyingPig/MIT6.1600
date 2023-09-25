@@ -308,7 +308,7 @@ we XOR these bytes with the ciphertext.
     Implement your attack as `attack_two` in
     [`wep/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/wep/attacker.py).
 
-1.  A WEP recipient who receives a data frame with
+1.  *Extra credit (challenging)*: A WEP recipient who receives a data frame with
     an invalid integrity hash will complain, while
     a recipient who receives a valid data frame
     will not. Explain how an attacker can use this
@@ -317,6 +317,14 @@ we XOR these bytes with the ciphertext.
     
     Implement your attack as `attack_three` in
     [`wep/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/wep/attacker.py).
+
+    _Hint_: Think about resizing the packet that
+    the attacker intercepts.
+
+    _Hint_: The fastest attack will exploit some
+    structural properties of the CRC32 checksum.
+    You will have to do some research to figure it
+    out.
     
 
 # Extra credit: Bad randomness in GMAC
