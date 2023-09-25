@@ -62,6 +62,11 @@ behind this lab assignment.
 
 <hr>
 
+>    **WARNING:** The code for this lab requires Python
+>    3.10 or higher. (The code will not run with older versions of Python.)
+>    Please make sure to upgrade before attempting to
+>    run the code.
+
 In this lab assignment, you will attack an authenticated
 key-value store that uses Merkle trees.  The code is available at
 [https://github.com/mit-pdos/6.1600-labs/tree/main/merkle](https://github.com/mit-pdos/6.1600-labs/tree/main/merkle).
