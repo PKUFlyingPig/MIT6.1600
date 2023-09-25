@@ -39,8 +39,6 @@ be a pseudorandom function. Let $$n \approx 256$$ be the security parameter.
 1.  The function $$\mathsf{MAC}(k,m) := k \oplus m$$
     is a secure MAC.
 
-1.  The function $$\mathsf{MAC}((k_1, k_2), m)$$
-
 1.  Let $$H \colon \{0,1\}^* \to \{0,1\}^\ell$$ be a collision-resistant hash function.
     There is a collision-finding attack on $$H$$ that runs in time roughly $$2^{\ell/2}$$.
 
