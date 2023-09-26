@@ -105,7 +105,7 @@ Answer the following questions:
   (get operations)?  How does the client know that the server restarted?
 
     _Hint:_ if you get the client and server in an inconsistent state after
-  restarting the server, you can use `python cli.py reset` to get yourself
+  restarting the server, you can use `venv/bin/python cli.py reset` to get yourself
   back to a clean starting state again.
 
 2. Why do subsequent client updates (put operations) fail to execute
