@@ -1,14 +1,21 @@
 Warm-Up Excercises:
 
-A)
+A) Subsequent client lookups (get operations) will fail. The client will know that the server 
+restarted if the root hash of the Merkle tree it holds doesn't match the root hash from the server.
 
-B)
+B) The client cannot be certain that the server it is communicating with is the same as before (or even a legitimate server)
+ as the Merkle tree has been reset. Trust needs to be re-established. If put operations didn't fail,
+ the client might end up updating a key-value pair on a server that it shouldn't trust, which could 
+ lead to data corruption or unauthorized data access.
 
-C)
+C) The length of the proof is 9. The first 8 bits of the hash of "hello" and "foo" are the same. So after
+ inserting hello=world and foo=bar, the depth of the merkel tree is 9. The merkle proof contains the siblings
+ all the way from the leaf to the root, so the length of the proof is 9.
 
 Attack 1:
 
-A)
+A) H_kv is computed as the hash of the concatenation of key and value. So hash(hello=world) == hash(hellow=orld).
+We can reset the store and then insert hellow=orld. 
 
 
 Attack 2:
