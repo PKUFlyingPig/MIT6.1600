@@ -1,9 +1,11 @@
 class AttackOne:
     def __init__(self, s):
         self._store = s
+        self._store.reset()
+        self._store.insert(b"hellow", b"orld")
 
     def attack_fake_key(self):
-        return b"hello"
+        return b"hellow"
 
     def lookup(self, key):
         return self._store.lookup(key)
