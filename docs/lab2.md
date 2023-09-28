@@ -9,7 +9,48 @@ title: "Lab 2: Bad randomness"
     ol ol { list-style-type: circle; }
 </style>
 
+
+**Instructions on how to submit Lab 2:**
+Please download all the required files from the [lab2 github repo](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/).
+
+* **Problem 0:** Please complete the True/False questions in the [lab0-problem0 gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3287458/).
+
+* **Code:** Place your code answers in the template [`ecdsa/sol.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/ecdsa/sol.py) for ecdsa questions and [`wep/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/wep/attacker.py).
+    Please include all code necessary to generate your solution in each of the respective methods. Do not just hard code working answers!
+
+* **Text:** Place your written answers in the template [`questions.txt`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/questions.txt)
+
+Upload all files (`sol.py`, `attacker.py`, `questions.txt`) to the [lab2 gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3287458/).
+
+**Running the Lab on Windows**
+`make check` and `make venv` do not natively work on Windows.
+
+If you are using a windows machine, please see the [Windows Instructions](https://github.com/mit-pdos/6.1600-labs/tree/main/merkle/windows-instructions.md).
+
+**Gradescope autograder:**
+Your code will be graded with the Gradescope autograder with a total timeout of 40 minutes.
+
+There is a STRICT 6.0GB memory limit on Gradescope. Reasonable solutions to this lab should not come close to approaching this memory limit.
+
+
+**Plagiarism:** Gradescope automatically
+runs a surprisingly effective 
+plagiarism-detection tool on your
+submissions. Please do not copy code from your
+fellow students. Refer to the "Collaboration"
+section of the [course
+info](https://61600.csail.mit.edu/2023/handouts/info.pdf)
+document for details on what types of
+collaboration are and aren't allowed in 6.1600.
+If you are having trouble completing an assignment
+for whatever reason, _please_ ask the course staff
+for help. We are often happy to give help and,
+in many cases, extensions too! 
+We are not happy when we find copied code.
+
 # Problem 0: True/False
+
+Please complete the True/False questions in the [lab0-problem0 gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3287458/).
 
 For these problems, let $$F \colon \{0,1\}^n \times \{0,1\}^n \to \{0,1\}^n$$ 
 be a pseudorandom function. Let $$n \approx 256$$ be the security parameter.
@@ -78,7 +119,7 @@ be a pseudorandom function. Let $$n \approx 256$$ be the security parameter.
 # Problem 1: Bad randomness in key generation
 
 The file
-[`ecdsa/keygen.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/ecdsa/keygen.py)
+[`ecdsa/keygen.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/ecdsa/keygen.py)
 generates an ECDSA signing keypair and prints the
 resulting public key to standard output.
 
@@ -87,7 +128,7 @@ resulting public key to standard output.
     to recover the secret signing key given only the
     public verification key.
 
-    Your task is to write a program, `attack.py`,
+    Your task is to write a program, `problem_1a` in `sol.py`,
     that:
     
     *  takes a date (formatted as
@@ -109,12 +150,11 @@ resulting public key to standard output.
     -----END PUBLIC KEY-----
     ```
 
-    Later on, we should be able to use `attack.py` to
+    Later on, we should be able to use `problem_3a` to
     recover the secret key...
     ```
-    $ python attack.py 2023-08-16 < key.txt
+    $ problem_3a(2023-08-16,key.txt)
     88928882924258032953987945121779605092553192944307381616887680985059143398985
-
     ```
 
     Run `make check` to test your solution.
@@ -204,17 +244,20 @@ integer.
 
 
 
-1.  Write a program that takes as input two ECDSA signatures,
-    signed using the same nonce, and outputs the signer's secret key.
-    Your attack program should read the two signatures from standard input
-    and should write the secret key to standard output as a base-10 integer.
-    The input file will have the following format:
+1.  Write a program, in `problem_2b()` that takes as input two ECDSA signatures,
+    signed using the same nonce, the hashes of the two messages signed, and outputs the signer's secret key.
+    
+    The input to problem_2b will be two tuple signatures (in the form `(r,s)`) as well as `H(m1)` and `H(m2)` (converted to an integer) for example:
+    
     ```
-    r=3373270495537608166420301124031645059552155087339817978895
-    s=4866115514576831317719439267655910857343196914135233616904
+    sig1 = (3373270495537608166420301124031645059552155087339817978895, 
+    4866115514576831317719439267655910857343196914135233616904)
 
-    r=3373270495537608166420301124031645059552155087339817978895
-    s=1026436076375142414773366823398026947727009880581933863772
+    sig2 = (3373270495537608166420301124031645059552155087339817978895,
+    1026436076375142414773366823398026947727009880581933863772)
+
+    Hm1 = 549937035807590235590408220127762782653536091071
+    Hm2 = 111625161468258865202361239710433310078751980605
     ```
     Each `(r,s)` pair is one ECDSA signature. 
     The order `q` of the NIST curve is listed here for your
@@ -222,9 +265,6 @@ integer.
     ```
     q=6277101735386680763835789423176059013767194773182842284081
     ```
-
-
-
 
 1.  In the ECDSA specification, $$\alpha_\text{t}$$
     is a uniformly random integer in the range
@@ -291,9 +331,9 @@ we XOR these bytes with the ciphertext.
     $$|m|$$) of the attacker's choosing.
 
     Implement your attack as `attack_one` in
-    [`wep/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/wep/attacker.py).
+    [`wep/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/wep/attacker.py).
     The precise encryption scheme used by WEP is
-    implemented by `send_packet()` in [`wep/victim.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/wep/victim.py).
+    implemented by `send_packet()` in [`wep/victim.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/wep/victim.py).
 
 1.  WEP uses the CRC32 non-cryptographic hash 
     function to compute the message-integrity hash.
@@ -306,7 +346,7 @@ we XOR these bytes with the ciphertext.
     the message that the frame encrypts.
 
     Implement your attack as `attack_two` in
-    [`wep/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/wep/attacker.py).
+    [`wep/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/wep/attacker.py).
 
 1.  *Extra credit (challenging)*: A WEP recipient who receives a data frame with
     an invalid integrity hash will complain, while
@@ -316,7 +356,7 @@ we XOR these bytes with the ciphertext.
     an encrypted frame.
     
     Implement your attack as `attack_three` in
-    [`wep/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/wep/attacker.py).
+    [`wep/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/wep/attacker.py).
 
     _Hint_: Think about resizing the packet that
     the attacker intercepts.
