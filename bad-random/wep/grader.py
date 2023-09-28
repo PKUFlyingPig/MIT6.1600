@@ -53,10 +53,21 @@ def grade_three():
     if plaintext != guess:
         raise Exception("Incorrect guess")
 
+def test_questions():
+    file = open("../questions.txt", "r")
+    #read the content of file
+    data = file.read()
+    #get the length of the data
+    number_of_characters = len(data)
+
+    if(number_of_characters < 500):
+        raise Exception("questions.txt not answered!")
+
 checks = {
     "one": grade_one,
     "two": grade_two,
     "three": grade_three,
+    "questions": test_questions
 }
 
 if __name__ == '__main__':
