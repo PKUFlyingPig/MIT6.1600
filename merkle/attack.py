@@ -4,6 +4,19 @@ import hashlib
 def H(*args):
     return hashlib.sha256(b''.join(args)).digest()
 
+def H_empty():
+    return b''
+
+def H_kv(key, val):
+    return H(key, val)
+
+def H_internal(children):
+    return H(children[0], children[1])
+
+def traversal_path(key):
+    return bitstring.BitArray(H(key))
+
+
 class AttackOne:
     def __init__(self, s):
         self._store = s
@@ -26,7 +39,7 @@ class AttackTwo:
         for i in range(1, 5000):
             fake_key = b''.join(arr[:i])
             fake_value = b''.join(arr[i:])
-            path = bitstring.BitArray(H(fake_key))
+            path = traversal_path(fake_key)
             if path[0] == False:
                 self.fake_kvs[fake_key] = fake_value
 
@@ -48,7 +61,28 @@ class AttackThree:
         self._store = s
 
     def lookup(self, key):
-        return self._store.lookup(key)
+        proof = self._store.lookup(key)
+        if proof.key is None and proof.val is None:
+            node_hash = H_empty()
+        else:
+            node_hash = H_kv(proof.key, proof.val)
+
+        path = traversal_path(key)
+        for (leaf_direction, sibling) in reversed(list(zip(path[2:], proof.siblings[2:]))):
+            children = [None, None]
+            children[int(leaf_direction)] = node_hash
+            children[int(not leaf_direction)] = sibling
+            node_hash = H_internal(children)
+        
+        if path[1] == False:
+            proof.key = node_hash
+            proof.val = proof.siblings[1]
+        else:
+            proof.key = proof.siblings[1]
+            proof.val = node_hash
+        proof.siblings = [proof.siblings[0]]
+        
+        return proof
 
 class AttackFour:
     def __init__(self, s):
