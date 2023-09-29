@@ -13,7 +13,7 @@ title: "Lab 2: Bad randomness"
 **Instructions on how to submit Lab 2:**
 Please download all the required files from the [lab2 github repo](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/).
 
-* **Problem 0:** Please complete the True/False questions in the [lab2 T/F gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3287458/).
+* **Problem 0:** Please complete the True/False questions in the [lab2-problem0 gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3287458/).
 
 * **Code:** Place your code answers in the template [`ecdsa/sol.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/ecdsa/sol.py) for ecdsa questions and [`wep/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/wep/attacker.py).
     Please include all code necessary to generate your solution in each of the respective methods. Do not just hard code working answers!
@@ -50,7 +50,7 @@ We are not happy when we find copied code.
 
 # Problem 0: True/False
 
-Please complete the True/False questions in the [lab0-problem0 gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3287458/).
+Please complete the True/False questions in the [lab2-problem0 gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3287458/).
 
 For these problems, let $$F \colon \{0,1\}^n \times \{0,1\}^n \to \{0,1\}^n$$ 
 be a pseudorandom function. Let $$n \approx 256$$ be the security parameter.
