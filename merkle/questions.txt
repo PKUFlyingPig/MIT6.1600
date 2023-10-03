@@ -20,12 +20,25 @@ We can reset the store and then insert hellow=orld.
 
 Attack 2:
 
-A)
+A) The attack is based on two weakness: (1) H_kv and H_internal is both computed as the hash of the concatenation of the input.
+(2) adversary can manipulate the proof returned to the client. To craft the attack, we can generate as many fake key/value pairs 
+which satisfy i) first bit of hash(key) == 0, this guarantees that the traversal path goes left first, thus the first proof is 
+the right sibling. ii) the concatenation of all the fake_key/fake_value is the same, say, fake_kv_concat. Then we can construct 
+the attack key/value as follows: set attack_key=hash(fake_kv_concat) and attack_value=proof_sibling (proof sibling can be set as
+anything you want).
 
 
 Attack 3:
 
-A)
+A) The attack also exploits the weakness that H_kv and H_internal is both computed as the hash of the concatenation of the input.
+When the client issues a get operation, we can hijack the proof returned from the real store. Then we replay the proof until the second
+last proof stage. There are four possibilities:
+       root               root             root                root
+      /    \             /    \           /    \              /    \
+    node proof[0]     node   proof[0] proof[0] node      proof[0]  node
+   /   \              /    \                  /    \              /    \
+  hash  proof[1]   proof[1] hash           hash  proof[1]    proof[1]  hash
+No matter which case, we can set fake_key/fake_value as the left/right child of node, then set proof as [proof[0]].
 
 
 Attack 4 (Optional/Extra Credit):
@@ -34,6 +47,11 @@ A)
 
 Security Definition:
 
-A)
+A) Suppose that a client performs some set of key-value puts. The client is secure if, when it performs a subsequent
+get of key K that it previous put against a store controlled by a computationally-bounded adversary, it will return the same key-value
+pair it previous put and key equals to K, or raise an exception. When it performs a subsequent get of key K that it has not ever put before,
+it will return None, or raise an exception.
 
-B)
+B) First, change the implementation of H_kv and H_internal to avoid simple concatenation-then-hash method. We can create a more robust
+two-input CRHF by, e.g., prefixing each input with its length then concatenate and hash. Second, client should raise an exception if
+the proof.key != the key it queris for.
