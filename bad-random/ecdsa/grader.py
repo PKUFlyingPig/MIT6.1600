@@ -28,11 +28,11 @@ def test_1():
 
 
 
-def test_3():
+def test_2():
     message_1 = str("message_1")
     message_2 = str("message_2")
 
-    sk = SigningKey.generate(curve=NIST256p)
+    sk = SigningKey.generate()
     pk = sk.privkey.secret_multiplier
 
     vk = sk.get_verifying_key()
@@ -50,12 +50,7 @@ def test_3():
     Hm2 = int(Hm2, 16)
 
     #Start the attack
-    result = problem_3b((r1,s1), (r2,s2), Hm1, Hm2)
-
-    print(vk.pubkey.order)
-
-    print(result)
-    print(pk)
+    result = problem_2b((r1,s1), (r2,s2), Hm1, Hm2)
     
     if(result != pk):
         raise Exception("Attack key does not equal private key.")
@@ -63,7 +58,7 @@ def test_3():
 
 checks = {
     "1": test_1,
-    "3": test_3,
+    "2": test_2,
 }
 
 if __name__ == '__main__':
