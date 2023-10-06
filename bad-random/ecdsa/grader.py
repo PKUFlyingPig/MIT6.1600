@@ -1,5 +1,5 @@
 
-from sol import problem_1a, problem_3b
+from sol import problem_1a, problem_2b
 from ecdsa import SigningKey, NIST256p
 from ecdsa.util import sigencode_string, sigdecode_string
 import hashlib 
