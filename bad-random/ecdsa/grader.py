@@ -18,8 +18,6 @@ def test_1():
     secexp = int.from_bytes(h, "big")
     sk = SigningKey.from_secret_exponent(secexp, curve=NIST256p)
     vk = sk.verifying_key
-    str(vk.to_pem(), "ascii")
-
 
     result = problem_1a(date_string,vk)
     if(result != sk):
