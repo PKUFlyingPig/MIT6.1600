@@ -150,10 +150,12 @@ resulting public key to standard output.
     -----END PUBLIC KEY-----
     ```
 
-    Later on, we should be able to use `problem_3a` to
+    Later on, we should be able to use `problem_1a` to
     recover the secret key...
     ```
-    $ problem_3a(2023-08-16,key.txt)
+    $ with open('key.txt', 'r') as file:
+    $   print(problem_1a("2023-08-16",file.read()))
+
     88928882924258032953987945121779605092553192944307381616887680985059143398985
     ```
 
