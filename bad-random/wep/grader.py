@@ -54,7 +54,7 @@ def grade_three():
         raise Exception("Incorrect guess")
 
 def test_questions():
-    file = open("../questions.txt", "r")
+    file = open("questions.txt", "r")
     #read the content of file
     data = file.read()
     #get the length of the data

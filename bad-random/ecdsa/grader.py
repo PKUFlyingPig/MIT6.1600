@@ -5,14 +5,17 @@ from ecdsa.util import sigencode_string, sigdecode_string
 import hashlib 
 import keygen
 import time
+from datetime import datetime
+import random
 
 
 import traceback
 
 def test_1():
-    b = b'%d' % time.time()
+    random_time = random.randint(915148800,1672560000)
+    b = b'%d' % random_time
 
-    date_string = time.strftime("%Y-%m-%d")
+    date_string = datetime.fromtimestamp(random_time).strftime("%Y-%m-%d")
     h = hashlib.sha256(b).digest()
     # Convert digest byte-array to an integer, use as secret key
     secexp = int.from_bytes(h, "big")
