@@ -325,7 +325,7 @@ exactly.
 
 **NOTE:** Your attack does not need to succeed
 with probability 1. It is good enough if your
-attack works with probability 10\% or so -- as 
+attack works with probability 10% or so -- as 
 long as you can convince the grader to accept
 your solution.
 
