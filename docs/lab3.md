@@ -1,5 +1,5 @@
 ---
-title: "Lab 3: Time and timing channels"
+title: "Lab 3: Performance and side channels"
 ---
 
 <style type="text/css">
@@ -235,7 +235,7 @@ Finally, you must not access private variables of
 the `BadServer` instance. 
 
 
-## Problem 3: SSH server performance
+## Problem 3: SSH Security
 
 In this lab, you will work with an SSH-based
 bulletin-board server called "sshBB," built from the very slick
@@ -246,7 +246,7 @@ without breaking either its security or functionality
 properties.
 
 The code for this assignment is in 
-[`perf`](https://github.com/mit-pdos/6.1600-labs/tree/main/perf).
+[`ssh`](https://github.com/mit-pdos/6.1600-labs/tree/main/ssh).
 
 # Getting started
 
@@ -255,14 +255,6 @@ environment.
 
 # Background
 
-The sshBB server authenticates to users using its 
-SSH host private key, stored in `keys/server`.
-Currently, sshBB does not implement any actual
-bulletin-board functionality: after authenticating
-a remote user, it just prints a message to the
-user's terminal and closes the session.
-
-> If you would like, you can add some interactive functionality to sshBB by modifying [`sshbb.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/perf/sshbb.py)'s `do_accept` method. At the end of the function, the server can write to/read from the file-like object `f` to interact with the user.
 
 The sshBB service has two types of users:
 _administrators_ and _normal users_.
