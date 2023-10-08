@@ -21,7 +21,6 @@ def grade_decrypt():
         secret += '"city%d": "%s",\n' % (i, random.choice(countries))
     secret += "}\n"
 
-    print(secret)
     c = client.Client()
 
     def run_client(prefix):

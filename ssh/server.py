@@ -107,8 +107,9 @@ def main():
             do_accept(sock)
         except socket.error as e:
             print("  | Accept failed: " + str(e))
-            print("  \\\n")
             traceback.print_exc()
+        except paramiko.ssh_exception.IncompatiblePeer as e:
+            print("  | Accept failed: " + str(e))
         print("  \\\n")
 
 if __name__ == "__main__":

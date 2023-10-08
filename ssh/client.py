@@ -71,5 +71,3 @@ class Client:
 
             return (b.bytes_out, b.bytes_in)
 
-if __name__ == "__main__":
-    print(run_client(""))

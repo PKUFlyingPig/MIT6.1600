@@ -7,7 +7,8 @@ def attack_decrypt(client_fn):
 
 class AttackTamper:
     def __init__(self):
-        self.bytes = 0
+        # Any state you need for the attack.
+        pass
 
     def handle_data(self, data):
         # Your attack here.

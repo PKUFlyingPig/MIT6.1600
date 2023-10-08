@@ -237,92 +237,140 @@ the `BadServer` instance.
 
 ## Problem 3: SSH Security
 
-In this lab, you will work with an SSH-based
-bulletin-board server called "sshBB," built from the very slick
-[`paramiko`](https://www.paramiko.org/) library.
-Your job will be to modify the server to make it
-reply to requests as quickly as possible
-without breaking either its security or functionality
-properties.
+In this problem, you will mount two 
+different attacks on a real SSH implementation.
+The SSH client and server are built with the very
+slick [`paramiko`](https://github.com/paramiko/paramiko) library.
 
-The code for this assignment is in 
+The starter code for this assignment is in 
 [`ssh`](https://github.com/mit-pdos/6.1600-labs/tree/main/ssh).
+
+You will have to implement two functions in
+[`ssh/attack.py`](https://github.com/mit-pdos/6.1600-labs/blob/main/ssh/attack.py).
+You should not change any of the other file -- we
+will grade your solution against fresh copies of these files.
+
 
 # Getting started
 
 Run `make venv` to set up your development
 environment.
 
-# Background
-
-
-The sshBB service has two types of users:
-_administrators_ and _normal users_.
-
-* Administrators authenticate to sshBB using SSH public keys.
-  The public keys of the current sshBB administrators are stored
-  in `data/admin-keys.txt`, with one key per line in the format:
-  ```
-  username1,pubkey1a
-  username1,pubkey1b
-  username2,pubkey2
-  username3,pubkey3
-  ...
-  ```
-  where the public keys are stored in the default SSH format for public keys.
-  A single administrator may have multiple public keys.
-
-  Run `make data/admin-keys.txt` to generate some
-  example administrator keys. We may test your
-  server with an arbitrary number of administrator
-  keys of any type that `paramiko` supports.
-
-* Normal users authenticate to sshBB using passwords.
-  The list of users, salts, and password hashes is
-  in `data/passwords.txt`.
-
-  The password file has the following format:
-    ```
-    username1,salt1,hash1
-    username2,salt2,hash2
-    ...
-    ```
-  The salts are binary blobs; we store them as hex strings.
-
-  Run `make data/passwords.txt` to generate
-  a password file.
-  Run `make add-user user=carol pass=secret123` to
-  add user `carol` to the password file with
-  password `secret123`.
-  
-
 # Running the server
 
-Run `make run-server` to start the sshBB server.
-
-After running `make data/admin-keys.txt`,
-you should be able to authenticate to the server as `alice` 
-(in a separate shell) using:
-```
-$ ssh -l alice -i keys/alice -p 2200 localhost
-```
+Run `venv/bin/python server.py` to start the ssh server.
 
 If everything works, you should see the following 
-message on the client side:
+message: 
 ```
-Welcome to the bulletin board!
-Connection to localhost closed.
-```
-
-After adding a password-based user account by
-running `make add-user` (as above), you should be
-able to log in as that user with a password:
-```
-$ ssh -l carol -p 2200 localhost
+Listening for connection ...
 ```
 
+To run the grader, *open a new shell* (separate
+from the shell that is running the server) and run:
+```
+venv/bin/python grader.py
+```
 
-# Your task
+# Part (a): Compress then encrypt
 
-Your task
+The SSH protocol supports compression: the client
+first compresses the data it wants to send to the
+server, and then the client encrypts it.
+In this problem, you will see how an attacker can
+abuse compress-then-encrypt to decrypt encrypted traffic.
+This attack works against real SSH implementations.
 
+The code in `grade_decrypt` of
+[`ssh/grader.py`](https://github.com/mit-pdos/6.1600-labs/blob/main/ssh/grader.py)
+chooses the names of three capital cities at
+random and puts them into a JSON object like this:
+```
+{
+"city0": "Victoria, Seychelles",
+"city1": "Seoul, South Korea",
+"city2": "Paris, France",
+}
+```
+The grader stores this object in a string called
+`secret`, and then sends it via SSH to the SSH server.
+
+As the attacker in this problem, you are able to
+somehow convince the SSH client to send a string
+`evil` of your choosing alongside the string `secret`.
+So the string that the SSH client sends to the
+server is actually `evil+secret`.
+(This scenario can occur in a number of contexts.
+On the web, for example, a malicious website can trick a client
+into sending HTTPS requests that combine
+attacker-controlled fields with client secrets.)
+
+
+**Your task:**
+You must implement the function `attack_decrypt` in
+[`ssh/attack.py`](https://github.com/mit-pdos/6.1600-labs/blob/main/ssh/attack.py).
+Your code may call `client_fn` many times as:
+```
+(bytes_out, bytes_in) = client_fn("evil string")
+```
+This instructs the SSH client to send the string
+`"evil string" + secret` to the SSH server over
+the encrypted channel. The function returns the
+number of bytes sent to the server (`bytes_out`)
+and bytes received from the server (`bytes_in`)
+during the client-server interaction.
+
+Your job is to recover the string `secret`
+exactly.
+
+**NOTE:** Your attack does not need to succeed
+with probability 1. It is good enough if your
+attack works with probability 10\% or so -- as 
+long as you can convince the grader to accept
+your solution.
+
+
+# Part (b): Tampering with packets
+A [standard SSH implementation](https://datatracker.ietf.org/doc/html/rfc4253#section-6) applies
+a MAC to each SSH-protocol packet.
+In this part, you will attack a _broken_
+implementation of SSH that does not use MACs at all.
+(More precisely, our implementation uses a MAC that always
+outputs a 160-bit string of zeros.
+The code for this no-op MAC is in [`ssh/opts.py`](https://github.com/mit-pdos/6.1600-labs/blob/main/ssh/opts.py).)
+
+The code in `grade_tamper` of
+[`ssh/grader.py`](https://github.com/mit-pdos/6.1600-labs/blob/main/ssh/grader.py)
+starts an SSH client, connects to the SSH server,
+and sends the shell command `ls ./file/*` to the server.
+
+**Your task:** You will play the role of an
+in-network attacker that tampers with the SSH packets
+as they flow from the client to the server.
+Your task is to cause the server to receive the
+shell command `rm -r /`, instead of the command
+that the client intended to send..
+
+In particular, you must implement the function
+`AttackTamper.handle_data` in [`ssh/attack.py`](https://github.com/mit-pdos/6.1600-labs/blob/main/ssh/attack.py).
+The grader code will invoke your `handle_data`
+function each time the SSH client sends data 
+to the SSH server. The function takes as input the
+raw bytes of the data that the SSH client sent and it outputs
+whatever bytes the attacker wants to relay to the SSH server.
+If you want to save state across invocations of
+`handle_data`, you can store it as members of `AttackTamper`.
+(That is, `handle_data` can set `self.blah = 7` to
+store the value of `blah`.)
+
+[If the SSH server receives](https://github.com/mit-pdos/6.1600-labs/tree/ssh/server.py#L78) 
+the special string `rm -r /`,
+it will reply to the client with a special message
+that the grader will use to determine that your
+attack has worked.
+
+You may find it helpful to read a bit about the
+SSH protocol in [RFC 4253](https://datatracker.ietf.org/doc/html/rfc4253)
+and [RFC 4254](https://datatracker.ietf.org/doc/html/rfc4254),
+though you should not need to go very deep into
+either to complete the problem.
