@@ -1,6 +1,7 @@
 
 import paramiko
 import socket
+import traceback
 
 import constants
 import opts
@@ -28,7 +29,10 @@ class SocketWrapper:
 
     def send(self, b):
         self.bytes_out += len(b)
-        b = self.handle_send(b)
+        try:
+            b = self.handle_send(b)
+        except:
+            traceback.print_exc()
         return self.sock.send(b)
 
     def settimeout(self, t):
