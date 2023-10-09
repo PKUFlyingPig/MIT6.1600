@@ -8,7 +8,7 @@ class NoneHash():
         pass
 
     def digest(self):
-        return b'0' * 20
+        return b'\x00' * 20
 
     def copy(self):
         return NoneHash()
