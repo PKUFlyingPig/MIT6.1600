@@ -105,11 +105,9 @@ def main():
     while True:
         try:
             do_accept(sock)
-        except socket.error as e:
+        except Exception as e:
             print("  | Accept failed: " + str(e))
             traceback.print_exc()
-        except paramiko.ssh_exception.IncompatiblePeer as e:
-            print("  | Accept failed: " + str(e))
         print("  \\\n")
 
 if __name__ == "__main__":
