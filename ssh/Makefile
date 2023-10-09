@@ -7,8 +7,8 @@ venv: requirements.txt keys/server keys/client
 
 keys/server:
 	mkdir -p keys
-	ssh-keygen -t ed25519 -f keys/server < /dev/null
+	ssh-keygen -t ed25519 -f keys/server -N ""
 
 keys/client:
 	mkdir -p keys
-	ssh-keygen -t ed25519 -f keys/client < /dev/null
+	ssh-keygen -t ed25519 -f keys/client -N ""
