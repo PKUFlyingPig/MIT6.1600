@@ -5,13 +5,9 @@ import random
 
 def get_countries():
     countries = []
-    with open("capitals.csv", "r") as f:
-        f.readline()
+    with open("capitals.txt", "r") as f:
         for line in f:
-            line = line.replace('"', '').strip()
-            parts = line.split(",")
-            parts.reverse()
-            countries.append(", ".join(parts))
+            countries.append(line.strip())
     return countries
 
 def grade_decrypt():
