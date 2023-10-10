@@ -4,9 +4,9 @@ B) 32 bytes and 64 bytes, but 64 bytes will not add more security because the ad
 
 Problem 2:
 
-A)
+A) alpha_t = (s1 - s2)^-1 * (Hm1 - Hm2) (mod q), then alpha = (s1 * alpha_t - Hm1) * r1^-1 (mod q)
 
-C)
+C) The signing nonce is sampled from {1, 2, ..., 2^128}, due to birthday paradox, after an attacker obtains 2^64 signatures, there exists two signatures that signed with the same signing nonce with constant probability. From B), we can recover the secret key from the two signatures.
 
 Problem 3:
 
