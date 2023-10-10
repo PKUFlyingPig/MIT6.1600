@@ -1,6 +1,6 @@
 Problem 1:
 
-B)
+B) 32 bytes and 64 bytes, but 64 bytes will not add more security because the adversary can directly guess the 32 bytes secret key.
 
 Problem 2:
 
