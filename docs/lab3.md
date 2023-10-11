@@ -389,7 +389,7 @@ either to complete the problem.
 
 # Part (c): _Extra credit_
 
-Repeat the attack of Part (b), except now you 
+Repeat the attack of Part (b), except that now you 
 must mount the attack against an SSH client that
 uses packet compression.
 
