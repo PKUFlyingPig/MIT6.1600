@@ -1,6 +1,8 @@
 
 class AttackTamper:
-    def __init__(self):
+    def __init__(self, compress):
+        # compress is set for the last extra credit part
+        self.compress = compress
         self.bytes = 0
 
     def handle_data(self, data):

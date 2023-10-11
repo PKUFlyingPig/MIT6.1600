@@ -29,7 +29,7 @@ def grade_decrypt():
         raise ValueError("Bad guess")
 
 def grade_tamper(compress=False):
-    a = attack.AttackTamper()
+    a = attack.AttackTamper(compress)
     c = client.Client(a.handle_data)
     c.run_client("ls ./files/*", compress)
 
