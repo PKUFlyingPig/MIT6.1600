@@ -17,6 +17,7 @@ def grade_decrypt():
         secret += '"city%d": "%s",\n' % (i, random.choice(countries))
     secret += "}\n"
 
+    print(secret)
     c = client.Client()
 
     def run_client(prefix):
@@ -27,19 +28,19 @@ def grade_decrypt():
     if secret != guess:
         raise ValueError("Bad guess")
 
-def grade_tamper():
+def grade_tamper(compress=False):
     a = attack.AttackTamper()
     c = client.Client(a.handle_data)
-    c.run_client("ls ./files/*", compress=False)
+    c.run_client("ls ./files/*", compress)
 
     if c.message_received != constants.BINGO:
         raise ValueError("Not successful")
-
 
 def main():
     parts = [
         ('a', grade_decrypt),
         ('b', grade_tamper),
+        ('c -- EXTRA CREDIT', lambda: grade_tamper(True)),
     ]
 
     for p in parts:

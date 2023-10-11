@@ -272,6 +272,18 @@ from the shell that is running the server) and run:
 venv/bin/python grader.py
 ```
 
+It might be helpful for you to enable paramiko's
+debug-level log messages. The following lines of 
+code will enable logging: 
+
+```
+import logging
+
+logging.basicConfig()
+logging.getLogger("paramiko").setLevel(logging.DEBUG)
+```
+
+
 # Part (a): Compress then encrypt
 
 The SSH protocol supports compression: the client
@@ -374,3 +386,10 @@ SSH protocol in [RFC 4253](https://datatracker.ietf.org/doc/html/rfc4253)
 and [RFC 4254](https://datatracker.ietf.org/doc/html/rfc4254),
 though you should not need to go very deep into
 either to complete the problem.
+
+# Part (c): _Extra credit_
+
+Repeat the attack of Part (b), except now you 
+must mount the attack against an SSH client that
+uses packet compression.
+
