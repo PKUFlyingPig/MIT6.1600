@@ -10,7 +10,10 @@ C) The signing nonce is sampled from {1, 2, ..., 2^128}, due to birthday paradox
 
 Problem 3:
 
-A)
+A) How many frames can be sent per second:​ 11Mbps / 2312 bytes ≈ 594.59 frames/s
+   Since IV is 24 bits long, due to birthday paradox, in 2^12 frames, there are two using the same IV. So an attacker have to wait 2^12 / 594.59 ≈ 6.89 s to see two frames using the same IV.
+
+When two frames are encrypted with the same IV and the same secret key, it's possible to launch a stream cipher attack. By XORing the two ciphertexts together, the attacker can essentially cancel out the keystream, effectively XORing the two plaintexts together. If the attacker knows or can guess a portion of one of the plaintexts (e.g., a header that follows a known format), they can recover that same portion of the other plaintext.
 
 Extra Credit:
 
