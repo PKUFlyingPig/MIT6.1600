@@ -17,6 +17,29 @@ blockquote {
 }
 </style>
 
+**Instructions on how to submit Lab 3:**
+Please download all the required files from the [lab3-timing github repo](https://github.com/mit-pdos/6.1600-labs/tree/main/timing/) and [lab3-ssh github repo](https://github.com/mit-pdos/6.1600-labs/tree/main/ssh/).
+
+
+* **Code:** Place your code answers in the template [`timing/attacker.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/timing/attacker.py) for the Problem 2 and [`ssh/attack.py`](https://github.com/mit-pdos/6.1600-labs/tree/main/bad-random/ssh/attack.py) for problem 3.
+
+* **Text:** Place your written answers in the template [`questions.txt`](https://github.com/mit-pdos/6.1600-labs/tree/main/ssh/questions.txt)
+
+
+Upload (`timing/attacker.py`) to the [lab3-timing gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3517357/).
+
+Upload (`ssh/attack.py`, `questions.txt`) to the [lab3-ssh gradescope assignment](https://www.gradescope.com/courses/533302/assignments/3517367/).
+
+**Running the Lab on Windows**
+`make check` and `make venv` do not natively work on Windows.
+
+If you are using a windows machine, please see the [Windows Instructions](https://github.com/mit-pdos/6.1600-labs/tree/main/merkle/windows-instructions.md).
+
+**Gradescope autograder:**
+Your code will be graded with the Gradescope autograder with a total timeout of 40 minutes.
+
+There is a STRICT 6.0GB memory limit on Gradescope. Reasonable solutions to this lab should not come close to approaching this memory limit.
+
 
 ## Problem 1: Performance
 
