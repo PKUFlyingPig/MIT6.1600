@@ -17,9 +17,10 @@ chooses a random value `secret`, and calls one of your attack functions,
 Your attack function must figure out the correct secret value and
 return it.
 
-Solve the four attack puzzles.  This will require you to understand
-what is shared between your function's execution environment and the
-secret chosen by the grader scenario code, and take advantage of it.
+Solve the four attack puzzles.  You can do anything you want in `attack.py`,
+but you may not modify `grader.py`.  This problem will require you to
+understand what is shared between your function's execution environment and
+the secret chosen by the grader scenario code, and take advantage of it.
 There are many ways to solve each scenario.  Some solutions could work
 for multiple scenarios.  There are more than 4 substantially different
 ways to solve the scenarios, though, so try to find distinct solutions.
