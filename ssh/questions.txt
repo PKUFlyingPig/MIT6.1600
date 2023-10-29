@@ -1,17 +1,29 @@
 Question 1:
 
-A)
+A) For large files (>1MB), AES-128-GMAC is generally expected to have better performance due to 
+hardware acceleration and the ability to parallelize the operation. The openssl benchmark on my
+computer also confirms this.
 
-B)
+B) Both AES-128 and AES-256 use the same block size of 128 bits, and the main difference is in 
+the number of rounds (10 rounds for AES-128 and 14 rounds for AES-256). So in theory it will take
+1.4 times longer.
 
-C)
+C) 
 
-i)
+i) RSA: 3072 bits; DSA: 3072 bits; ECDSA: 256 bits;
 
-ii)
+ii) Fastest: ECDSA; Moderate: DSA; Slowest: RSA;
+ECDSA usually has the fastest signing operation because it deals with much smaller key sizes and simpler arithmetic.
+DSA is generally faster than RSA but slower than ECDSA for the same security level.
 
-iii)
+iii) Fastest: RSA; Moderate: ECDSA; Slowest: DSA;
+RSA signature verification is typically the fastest because it involves a single modular exponentiation with a low exponent.
+ECDSA and DSA are more computationally intensive for verification, with DSA usually being the slowest.
 
-iv)
+iv) Fastest: ECDSA; Moderate: DSA; Slowest: RSA;
+ECDSA typically has the fastest key pair generation due to smaller key sizes. 
+RSA usually takes the longest because it involves finding large prime numbers for its public and private keys.
 
-D)
+D) I would recommend using Argon2 for storing hashed passwords on the server.
+Argon2 is currently considered the state-of-the-art password hashing algorithm and won the Password Hashing Competition in 2015.
+It provides strong resistance against both offline and online attacks, and it's highly configurable to allow for memory and time-cost factors, making it adaptable to future hardware improvements.
