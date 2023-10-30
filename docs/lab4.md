@@ -61,14 +61,14 @@ The code for this lab consists of three major parts:
   of the files and directories under `/tmp/sandbox` but should not be
   able to get out of that directory.
 
-  The WASI module is implemented in [wasi.py](wasi.py).  Our WASI
+  The WASI module is implemented in [wasi.py](https://github.com/mit-pdos/6.1600-labs/tree/main/wasm/wasi.py).  Our WASI
   module has some security issues in it, and it will be your goal to
   exploit them.
 
 - **The shell that runs inside the WebAssembly runtime.**  We have
   provided a simple shell, resembling the Unix shell, that will run
   inside the WebAssembly sandbox.  The shell implementation is in
-  [tinysh.c](tinysh.c), for your reference, but you will run the
+  [tinysh.c](https://github.com/mit-pdos/6.1600-labs/tree/main/wasm/tinysh.c), for your reference, but you will run the
   pre-compiled WebAssembly executable of this shell, `tinysh.wasm`.
 
   The shell is compiled together with the
@@ -167,13 +167,13 @@ and second, how would you take advantage of this invariant being violated?
 For this last part, your job is to use WebAssembly to execute some code
 in isolation from the rest of your system, so that if this code was
 buggy, it would not be able to access anything else on your system.
-We provide you with an implementation of SHA-256 in C, in `sha.c`.
+We provide you with an implementation of SHA-256 in C, in [sha.c](https://github.com/mit-pdos/6.1600-labs/tree/main/wasm/sha.c).
 This code is also compiled into a WebAssembly module, `sha-export.wasm`.
 The C implementation of SHA-256 provides a function, `SHA256(const
 unsigned char *d, size_t n, unsigned char *md)`, which computes the hash
 of `n` bytes of input data at address `d` and stores the resulting hash
 at address `md`.  Your job is to implement the `sha256()` function in
-`sandbox.py` to call `SHA256()` from `sha-export.wasm` and return the
+[sandbox.py](https://github.com/mit-pdos/6.1600-labs/tree/main/wasm/sandbox.py) to call `SHA256()` from `sha-export.wasm` and return the
 result.  You will need to think carefully about how to provide the input
 data and obtain the output data from this function, given the strong
 isolation of the WebAssembly module's memory.
