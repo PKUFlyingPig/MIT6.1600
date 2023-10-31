@@ -27,8 +27,12 @@ class Client:
             print(e)
             return api.VerifyResponse(False)
 
-    def measure_time(self, password: str, outer_iters = 5, inner_iters=5000) -> float:
-        req = api.VerifyRequest(password+"xx")
+    def measure_time(self, password: str, outer_iters = 5, inner_iters=5000, is_last_char=False) -> float:
+        if is_last_char:
+            req = api.VerifyRequest(password)
+        else:
+            req = api.VerifyRequest(password+"xx")
+            
         times = []
         # warmup
         for _ in range(10):
@@ -49,47 +53,52 @@ class Client:
         hex_chars = "0123456789abcdef"
         measured_times = dict.fromkeys(hex_chars, 0)
 
-        if loc <= 20:
-            num_iters = 5000
-        elif loc <= 40:
-            num_iters = 10000
+        is_last_char = (loc==2*l-1)
+        outer_iters = 5
+        if loc <= 16:
+            inner_iters = 10000
+        elif loc <= 32:
+            inner_iters = 20000
         else:
-            num_iters = 20000
+            inner_iters = 40000
         
-        if loc == 2 * l - 1:
-            num_iters = 50000
-
-        while True:
+        winner_counts = dict.fromkeys(hex_chars, 0)
+        for _ in range(20):
             for ch in hex_chars:
-                cur_time = self.measure_time(cur_password, inner_iters=num_iters)
+                cur_time = self.measure_time(cur_password, outer_iters=outer_iters, inner_iters=inner_iters, is_last_char=is_last_char)
                 test_password = cur_password + ch
-                test_time = self.measure_time(test_password, inner_iters=num_iters)
+                test_time = self.measure_time(test_password, outer_iters=outer_iters, inner_iters=inner_iters, is_last_char=is_last_char)
                 t = test_time - cur_time
                 measured_times[ch] = t
             
             next_char = max(measured_times, key=measured_times.get)
+            winner_counts[next_char] += 0.5
             sorted_items = sorted(measured_times.items(), key=lambda x: x[1], reverse=True)
-            conf = sorted_items[0][1] - sorted_items[1][1]
-            conf2 = sorted_items[1][1] - sorted_items[2][1]
-            if conf >= conf2 * 3:
+            conf = sorted_items[0][1] / sorted_items[1][1]
+            if conf >= 3 and conf <= 8 and max(winner_counts, key=winner_counts.get) == next_char and not is_last_char:
+                winner_counts[next_char] += 100
                 break
-        return next_char, measured_times, sorted_items
+
+        # winner = max(winner_counts, key=winner_counts.get)
+        winner = next_char
+        return winner, measured_times, sorted_items
 
     def steal_password(self, l: int) -> str:
-        passwd = '37a4e5bf847630173da7e6d19991bb8d'
+        passwd = 'f65bdbeea82bf1ec25d90f984861281d'
         stolen_password = ''
         for i in range(l * 2):  # Two hex chars for each byte
             next_char, measured_times, candidates = self.get_next_char(i, l, stolen_password)
             stolen_password += next_char
-            print(f"true   : {passwd[i]}, measured: {measured_times[passwd[i]]}")
-            print(f"candi 0: {candidates[0][0]}, measured: {measured_times[candidates[0][0]]}, conf: {measured_times[candidates[0][0]] - measured_times[candidates[1][0]]}")
-            print(f"candi 1: {candidates[1][0]}, measured: {measured_times[candidates[1][0]]}, conf: {measured_times[candidates[1][0]] - measured_times[candidates[2][0]]}")
-            print(f"candi 2: {candidates[2][0]}, measured: {measured_times[candidates[2][0]]}, conf: {measured_times[candidates[2][0]] - measured_times[candidates[3][0]]}")
+            print(f"true {i}: {passwd[i]}, measured: {measured_times[passwd[i]]}")
+            print(f"candi 0: {candidates[0][0]}, measured: {measured_times[candidates[0][0]]}, conf: {measured_times[candidates[0][0]] / measured_times[candidates[1][0]]}")
+            print(f"candi 1: {candidates[1][0]}, measured: {measured_times[candidates[1][0]]}, conf: {measured_times[candidates[1][0]] / measured_times[candidates[2][0]]}")
+            print(f"candi 2: {candidates[2][0]}, measured: {measured_times[candidates[2][0]]}, conf: {measured_times[candidates[2][0]] / measured_times[candidates[3][0]]}")
             print()
+
         return stolen_password
 
 if __name__ == "__main__":
-    passwd = '37a4e5bf847630173da7e6d19991bb8d'
+    passwd = 'f65bdbeea82bf1ec25d90f984861281d'
     nbytes = len(passwd) // 2
     server = bad_server.BadServer(passwd)
     alice = Client(server)
