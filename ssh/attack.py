@@ -1,3 +1,4 @@
+import zlib
 
 class AttackTamper:
     def __init__(self, compress):
@@ -11,14 +12,19 @@ class AttackTamper:
         self.t += 1
         if self.t == 10:
             plain_text = "ls ./files/*".encode('utf-8')
-            target_text = "rm -r /     ".encode('utf-8')
-            print(len(plain_text))
-            print(len(data))
-            print(data)
-            print()
-            altered_data = bytes([data[i + 14] ^ plain_text[i] ^ target_text[i] for i in range(12)])
-            # return data[:5] + altered_data + data[17:]
-            evil_data = data[:14] + altered_data + data[14+12:]
+            if self.compress:
+                compressed_plain_text = zlib.compress(plain_text)
+                target_text = "  rm -r /                                         ".encode('utf-8')
+                compressed_target_text = zlib.compress(target_text)
+                print(len(plain_text))
+                assert len(compressed_plain_text) == len(compressed_target_text)
+                payload_len = len(compressed_plain_text)
+                altered_data = bytes([data[i + 14] ^ compressed_plain_text[i] ^ compressed_target_text[i] for i in range(payload_len)])
+                evil_data = data[:14] + altered_data + data[14+payload_len:]
+            else:
+                target_text = "rm -r /     ".encode('utf-8')
+                altered_data = bytes([data[i + 14] ^ plain_text[i] ^ target_text[i] for i in range(12)])
+                evil_data = data[:14] + altered_data + data[14+12:]
             return evil_data
         
         return data
@@ -46,9 +52,9 @@ def attack_decrypt(client_fn):
                     new_candidates.append(probe)
 
         # print(new_candidates)
-        prefix_candidates = new_candidates
+        prefix_candidates = new_candidates[:5]
 
-    for x in prefix_candidates:
-        print(x)
+    # for x in prefix_candidates:
+    #     print(x)
     return prefix_candidates[0] + "}\n"
 
