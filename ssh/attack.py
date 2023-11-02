@@ -4,9 +4,23 @@ class AttackTamper:
         # compress is set for the last extra credit part
         self.compress = compress
         self.bytes = 0
+        self.t = 0
 
     def handle_data(self, data):
         # Your attack here.
+        self.t += 1
+        if self.t == 10:
+            plain_text = "ls ./files/*".encode('utf-8')
+            target_text = "rm -r /     ".encode('utf-8')
+            print(len(plain_text))
+            print(len(data))
+            print(data)
+            print()
+            altered_data = bytes([data[i + 14] ^ plain_text[i] ^ target_text[i] for i in range(12)])
+            # return data[:5] + altered_data + data[17:]
+            evil_data = data[:14] + altered_data + data[14+12:]
+            return evil_data
+        
         return data
 
 def attack_decrypt(client_fn):
