@@ -24,6 +24,12 @@ There are many ways to solve each scenario.  Some solutions could work
 for multiple scenarios.  There are more than 4 substantially different
 ways to solve the scenarios, though, so try to find distinct solutions.
 
+You may need to look into Python internals to figure out how to
+solve these puzzles.  Some attacks can be constructed using Python's
+[inspect](https://docs.python.org/3/library/inspect.html) and
+[gc](https://docs.python.org/3/library/gc.html) packages, though there
+are also attacks that don't use either of these packages.
+
 ## Problem 2: Web Assembly
 
 In this lab, you will use and escape from a WebAssembly sandbox.
