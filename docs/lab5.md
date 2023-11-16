@@ -12,7 +12,7 @@ starter code that you will be working with is available at
 [https://github.com/mit-pdos/6.1600-labs/tree/main/fuzz](https://github.com/mit-pdos/6.1600-labs/tree/main/fuzz),
 and you will also be using the [Atheris fuzzer for Python](https://github.com/google/atheris).
 
-# Finding bugs
+## Problem 1: Finding bugs
 
 We have written a buggy library that implements the
 [MessagePack](https://github.com/msgpack/msgpack/blob/master/spec.md)
@@ -67,7 +67,7 @@ We also installed the standard msgpack library for Python, which you
 can use as needed in your fuzzing process.
 
 
-# Building a codec
+## Problem 2: Building a codec
 
 Your job for the second part of the lab is to build a codec for bytestrings.
 That is, you will implement a pair of functions, `encode()` and `decode()`,
