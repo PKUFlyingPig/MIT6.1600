@@ -41,7 +41,10 @@ identical to the `example` data structure that what we started with.
 Your job is to find and fix bugs in this library.  We will test it
 against our own test cases, but we will not hand out these test cases
 to you upfront.  Instead, your job is to gain confidence that your
-fixed library is correct before you submit it for grading.
+fixed library is correct before you submit it for grading.  Correctness
+means correctly implementing the MessagePack specification; you can
+use the Python [`msgpack` library](https://pypi.org/project/msgpack/)
+as a reference implementation of MessagePack.
 
 We think that fuzzing is likely to be a productive way of
 finding bugs in the `msgpacker.py` library.  You can use the
@@ -63,8 +66,11 @@ which sets up a corresponding virtualenv:
     % ./venv/bin/python ...
 ```
 
-We also installed the standard msgpack library for Python, which you
+We also installed the standard `msgpack` library for Python, which you
 can use as needed in your fuzzing process.
+
+Submit your fixed `msgpacker.py` library, along with any fuzzing code
+that you've written as a way of showing your work.
 
 
 ## Problem 2: Building a codec
@@ -115,4 +121,6 @@ provided a skeleton file for you to get started,
 We do not supply any test cases for you to use; feel free to use any
 tools available at your disposal, such as the Atheris fuzzer, to gain
 confidence that your codec is correct.  We will grade it with our own
-test cases when you submit your solution.
+test cases when you submit your solution.  Submit your `codec.py`, along
+with any fuzz test cases that you used in developing it as a way of showing
+your work.
