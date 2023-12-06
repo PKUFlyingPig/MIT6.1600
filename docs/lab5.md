@@ -44,7 +44,8 @@ to you upfront.  Instead, your job is to gain confidence that your
 fixed library is correct before you submit it for grading.  Correctness
 means correctly implementing the MessagePack specification; you can
 use the Python [`msgpack` library](https://pypi.org/project/msgpack/)
-as a reference implementation of MessagePack.
+as a reference implementation of MessagePack.  (You can omit implementing
+support for floats, which we've omitted from our `msgpacker.py` library.)
 
 We think that fuzzing is likely to be a productive way of
 finding bugs in the `msgpacker.py` library.  You can use the
