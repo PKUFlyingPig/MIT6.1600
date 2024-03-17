@@ -14,7 +14,7 @@ shell: venv
 	. venv/bin/activate && python3 interactive.py
 
 grade-lab4: venv
-	. venv/bin/activate && python3 grade-lab.py $(GRADE_EXTRA_ARGS)
+	. venv/bin/activate && python3 grader.py $(GRADE_EXTRA_ARGS)
 
 grade: grade-lab4
 .PHONY: grade

@@ -1,0 +1,2 @@
+ln -s ../secret.txt s.txt
+cat s.txt
